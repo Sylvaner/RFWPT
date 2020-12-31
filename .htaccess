@@ -1,0 +1,12 @@
+<Files "docker-compose.yml">
+  Require all denied
+</Files>
+<Files "Dockerfile">
+  Require all denied
+</Files>
+<Files ".git">
+  Require all denied
+</Files>
+<Files "README.md">
+  Require all denied
+</Files>

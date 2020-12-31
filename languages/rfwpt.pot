@@ -1,0 +1,120 @@
+# Copyright (C) 2020 Sylvain DANGIN
+# This file is distributed under the same license as the rfwpt package.
+msgid ""
+msgstr ""
+"Project-Id-Version: rfwpt 0.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/wp-theme\n"
+"POT-Creation-Date: 2020-12-31 14:01:30+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2020-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: index.php:32
+msgid "No post"
+msgstr ""
+
+#: libs/PostManager.php:70
+msgid "Author"
+msgstr ""
+
+#: libs/PostManager.php:73
+msgid "Read more..."
+msgstr ""
+
+#: libs/ThemeManager.php:76
+msgid "Navigation menu"
+msgstr ""
+
+#: libs/ThemeManager.php:77
+msgid "Featured items"
+msgstr ""
+
+#: libs/ThemeManager.php:78
+msgid "Footer menu"
+msgstr ""
+
+#: libs/ThemeManager.php:80
+msgid "Side menu"
+msgstr ""
+
+#: libs/ThemeManager.php:126
+msgid "Appearance"
+msgstr ""
+
+#: libs/ThemeManager.php:127
+msgid "Features"
+msgstr ""
+
+#: libs/ThemeManager.php:128
+msgid "Colors"
+msgstr ""
+
+#: libs/ThemeManager.php:131
+msgid "Banner image"
+msgstr ""
+
+#: libs/ThemeManager.php:137
+msgid "Banner height"
+msgstr ""
+
+#: libs/ThemeManager.php:143
+msgid "Show featured items"
+msgstr ""
+
+#: libs/ThemeManager.php:149
+msgid "Show footer"
+msgstr ""
+
+#: libs/ThemeManager.php:155
+msgid "Show categories"
+msgstr ""
+
+#: libs/ThemeManager.php:161
+msgid "Background image"
+msgstr ""
+
+#: libs/ThemeManager.php:167
+msgid "Background image under principal menu"
+msgstr ""
+
+msgid "Text color"
+msgstr ""
+
+msgid "Background color"
+msgstr ""
+
+msgid "Link color"
+msgstr ""
+
+msgid "Link hover color"
+msgstr ""
+
+msgid "Featured background"
+msgstr ""
+
+msgid "Featured text"
+msgstr ""
+
+msgid "Navbar background"
+msgstr ""
+
+msgid "Navbar text"
+msgstr ""
+
+msgid "Navbar hover background"
+msgstr ""
+
+msgid "Navbar hover text"
+msgstr ""
+
+
+#. Theme Name of the plugin/theme
+msgid "rfwpt"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Sylvain DANGIN"
+msgstr ""

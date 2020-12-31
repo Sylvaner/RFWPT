@@ -1,0 +1,92 @@
+/*
+Theme Name: rfwpt
+Theme URI: https://github.com/Sylvaner/RFWPT
+Description: Really Free WordPress Theme. Thème Wordpress gratuit et libre sans mauvaise surprise.
+Requires PHP: 7.4
+Author: Sylvain DANGIN
+Version: 0.1
+Text Domain: rfwpt
+*/
+
+.featured-menu {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.featured-menu .card:hover {
+  box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, .3), 0 0 0 1px rgba(10, 10, 10, .2);
+}
+
+.featured-menu .card-content {
+  transition: all ease 0.5s;
+}
+
+.featured-menu .card-content:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  transform: scale(1.1);
+}
+
+.featured-menu .column {
+  margin-top: 0.75rem;
+}
+
+.featured-menu.columns {
+  margin-bottom: 0 !important;
+}
+
+.featured-menu .card-content {
+  text-align: center;
+}
+
+.featured-menu .card-content p.title {
+  font-size: 1rem;
+}
+
+.featured-menu .card-content i {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+}
+
+body,
+#global-content,
+#banner {
+  background-size: cover !important;
+}
+#banner {
+  width: 100%;
+  background-repeat: no-repeat !important;
+}
+
+#global-content .section .column:first-child .card {
+  margin-bottom: 0.75rem;
+}
+
+#global-content .posts-list .card:hover {
+  box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, .3), 0 0 0 1px rgba(10, 10, 10, .2);
+}
+
+.section {
+  padding: 1rem 1.5rem 0rem 1.5rem !important;
+}
+
+#global-content .column:first-child .card {
+  text-align: justify;
+}
+
+/**Fill vertically content**/
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+#global-content {
+  flex: 1;
+}
+
+/**Center navbar menu**/
+.navbar-centered {
+  flex-grow: 1;
+  justify-content: center !important;
+}

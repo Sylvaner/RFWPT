@@ -1,0 +1,13 @@
+version: "3.0"
+
+services:
+  rfwpt:
+    build: .
+    image: rfwpt
+    container_name: rfwpt
+    ports:
+    - 9090:80
+    volumes:
+    - .:/app/wp-content/themes/rfwpt
+    - ./plugins:/app/wp-content/plugins
+
