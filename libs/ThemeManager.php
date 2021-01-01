@@ -47,9 +47,11 @@ class ThemeManager
     private function addStyles(): void
     {
         // style.css du thème
-        wp_enqueue_style('style', get_stylesheet_uri());
-        wp_enqueue_style('bulma', get_template_directory_uri() . '/css/bulma.min.css');
-        wp_enqueue_style('fontawesome', get_template_directory_uri() . '/css/fontawesome/css/all.min.css');
+        if (!is_admin()) {
+            wp_enqueue_style('style', get_stylesheet_uri());
+            wp_enqueue_style('bulma', get_template_directory_uri() . '/css/bulma.min.css');
+            wp_enqueue_style('fontawesome', get_template_directory_uri() . '/css/fontawesome/css/all.min.css');
+        }
     }
 
     /**
