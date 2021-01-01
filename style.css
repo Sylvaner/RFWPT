@@ -13,6 +13,10 @@ Text Domain: rfwpt
   padding-right: 2rem;
 }
 
+.featured-menu .card {
+  height: 100%;
+}
+
 .featured-menu .card:hover {
   box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, .3), 0 0 0 1px rgba(10, 10, 10, .2);
 }
