@@ -102,6 +102,7 @@ class ThemeManager
     public function customizeRegister(WP_Customize_Manager $wpCustomize): void
     {
         $wpCustomize->add_setting('show_featured', ['default' => true]);
+        $wpCustomize->add_setting('fixed_menu', ['default' => false]);
         $wpCustomize->add_setting('banner_image', ['default' => 0, 'transport' => 'refresh']);
         $wpCustomize->add_setting('banner_height', ['default' => '100px', 'transport' => 'refresh']);
         $wpCustomize->add_setting('background_image_wp', ['default' => 0, 'transport' => 'refresh']);
@@ -159,6 +160,12 @@ class ThemeManager
                 'settings' => 'show_categories',
                 'type' => 'checkbox']);
 
+        $wpCustomize->add_control('fixed_menu', [
+                  'label' => __('Fixed top menu', 'rfwpt'),
+                  'section' => 'features',
+                  'settings' => 'fixed_menu',
+                  'type' => 'checkbox']);
+  
         $wpCustomize->add_control(new WP_Customize_Media_Control($wpCustomize, 'background_image_wp', [
           'label' => __('Background image', 'rfwpt'),
           'section' => 'appearance',
@@ -241,7 +248,11 @@ class ThemeManager
           height: <?php echo get_theme_mod('banner_height', '100px'); ?>;
           background: url('<?php echo wp_get_attachment_url(get_theme_mod('banner_image', '')); ?>') no-repeat;
         }
-        <?php endif ?>
+        <?php endif;
+        // Bug d'affichage, les 2 menus se superposent
+        if (is_admin_bar_showing()) {
+            echo '.navbar.is-fixed-top { top: 32px !important; }';
+        } ?>
       </style>
     <?php
     }

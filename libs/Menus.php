@@ -87,6 +87,7 @@ class Menus
      *
      * @param string $menuName Nom de la barre de navigation
      * @param string $containerClass Classe CSS du container globale
+     * @param bool $dropUp Afficher les menus secondaires vers le haut
      */
     public static function showNavbarMenu(string $menuName, string $containerClass, bool $dropUp = false): void
     {
