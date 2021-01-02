@@ -6,7 +6,7 @@
 class ThemeManager
 {
     // Instance du singleton
-    private static ?ThemeManager $instance = null;
+    private static $instance = null;
 
     /**
      * Constructeur privée pour le singleton
