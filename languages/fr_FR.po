@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: rfwpt 0.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/wp-theme\n"
 "POT-Creation-Date: 2020-12-31 14:01:30+00:00\n"
-"PO-Revision-Date: 2021-01-01 20:44+0100\n"
+"PO-Revision-Date: 2021-01-02 23:28+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -82,6 +82,9 @@ msgstr "Image de fond"
 #: libs/ThemeManager.php:167
 msgid "Background image under principal menu"
 msgstr "Image de fond sous le menu principal"
+
+msgid "Background image gradient"
+msgstr "Dégradé sur l'image de fond"
 
 msgid "Text color"
 msgstr "Texte"

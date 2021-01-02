@@ -4,7 +4,7 @@
  */
 get_header();
 if (is_front_page()) {
-    if (get_theme_mod('banner_image', '') !== 0) {
+    if (get_theme_mod('banner_image', 0) !== 0 && get_theme_mod('banner_image', 0) !== '') {
         echo '<section id="banner" class="hero"></section>';
     }
 }

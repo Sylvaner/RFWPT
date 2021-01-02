@@ -106,6 +106,7 @@ class ThemeManager
         $wpCustomize->add_setting('banner_image', ['default' => 0, 'transport' => 'refresh']);
         $wpCustomize->add_setting('banner_height', ['default' => '100px', 'transport' => 'refresh']);
         $wpCustomize->add_setting('background_image_wp', ['default' => 0, 'transport' => 'refresh']);
+        $wpCustomize->add_setting('background_image_gradient', ['default' => true, 'transport' => 'refresh']);
         $wpCustomize->add_setting('background_under_nav', ['default' => true, 'transport' => 'refresh']);
         $wpCustomize->add_setting('show_footer', ['default' => true, 'transport' => 'refresh']);
         $wpCustomize->add_setting('show_categories', ['default' => true, 'transport' => 'refresh']);
@@ -177,7 +178,12 @@ class ThemeManager
           'section' => 'appearance',
           'settings' => 'background_under_nav',
           'type' => 'checkbox']);
-
+        $wpCustomize->add_control('background_image_gradient', [
+            'label' => __('Background image gradient', 'rfwpt'),
+            'section' => 'appearance',
+            'settings' => 'background_image_gradient',
+            'type' => 'checkbox']);
+  
         foreach ($colors as $colorKey => $colorConfig) {
             $wpCustomize->add_control(new WP_Customize_Color_Control($wpCustomize, $colorKey, [
               'label' => __($colorConfig['label'], 'rfwpt'),
@@ -233,17 +239,22 @@ class ThemeManager
         if ($backgroundImageId !== 0 && $backgroundImageId !== '') {
             // Changement du point de départ
             if (get_theme_mod('background_under_nav', true)) {
-                echo '#global-nav { background: none; }';
-                echo 'body {';
+                echo '#global-nav { background: transparent; }';
+                echo 'html {';
             } else {
                 echo '#global-content {';
             }
-            echo "background: linear-gradient(#FFFFFF00, #FFFFFFFF), url('" . wp_get_attachment_url(get_theme_mod('background_image_wp', 0)) . "') no-repeat fixed;}";
+            if (get_theme_mod('background_image_gradient', true)) {
+                echo "background: linear-gradient(#FFFFFF00, #FFFFFFFF), url('" . wp_get_attachment_url(get_theme_mod('background_image_wp', 0)) . "') no-repeat fixed;";
+            } else {
+                echo "background: url('" . wp_get_attachment_url(get_theme_mod('background_image_wp', 0)) . "') no-repeat fixed;";
+            }
+            echo "background-size: cover;}";
         } else {
             echo '#global-content { background-color: #' . get_theme_mod('background_color', '#E0E0E0') . ';}';
         }
         // Affichage d'une bannière
-        if (get_theme_mod('banner_image', 0) !== 0):?>
+        if (get_theme_mod('banner_image', 0) !== 0 && get_theme_mod('banner_image', 0) !== ''):?>
         #banner {
           height: <?php echo get_theme_mod('banner_height', '100px'); ?>;
           background: url('<?php echo wp_get_attachment_url(get_theme_mod('banner_image', '')); ?>') no-repeat;
