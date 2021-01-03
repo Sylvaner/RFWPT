@@ -12,6 +12,7 @@
 <head>
   <meta charset="<?php bloginfo('charset'); ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <?php if (is_single()) : ?><meta name="description" content="<?php echo wp_strip_all_tags(get_the_excerpt(), true); ?>" /><?php endif ?>
   <title><?php bloginfo('name'); ?></title>
   <?php wp_head() ?>
 </head>

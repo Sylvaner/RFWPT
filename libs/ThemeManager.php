@@ -101,8 +101,8 @@ class ThemeManager
      */
     public function customizeRegister(WP_Customize_Manager $wpCustomize): void
     {
-        $wpCustomize->add_setting('show_featured', ['default' => true]);
-        $wpCustomize->add_setting('fixed_menu', ['default' => false]);
+        $wpCustomize->add_setting('show_featured', ['default' => true, 'transport' => 'refresh']);
+        $wpCustomize->add_setting('fixed_menu', ['default' => false, 'transport' => 'refresh']);
         $wpCustomize->add_setting('banner_image', ['default' => 0, 'transport' => 'refresh']);
         $wpCustomize->add_setting('banner_height', ['default' => '100px', 'transport' => 'refresh']);
         $wpCustomize->add_setting('background_image_wp', ['default' => 0, 'transport' => 'refresh']);
@@ -110,10 +110,15 @@ class ThemeManager
         $wpCustomize->add_setting('background_under_nav', ['default' => true, 'transport' => 'refresh']);
         $wpCustomize->add_setting('show_footer', ['default' => true, 'transport' => 'refresh']);
         $wpCustomize->add_setting('show_categories', ['default' => true, 'transport' => 'refresh']);
+        $wpCustomize->add_setting('use_custom_excerpt', ['default' => true, 'transport' => 'refresh']);
+        $wpCustomize->add_setting('excerpt_size', ['default' => 300, 'transport' => 'refresh']);
 
         $colors = [
           'text_color' => ['default' => '#4A4A4A', 'label' => 'Text color'],
           'background_color' => ['default' => '#E0E0E0', 'label' => 'Background color'],
+          'cards_color' => ['default' => '#FFFFFF', 'label' => 'Cards color'],
+          'text_buttons_color' => ['default' => '#FFFFFF', 'label' => 'Text buttons color'],
+          'buttons_color' => ['default' => '#3D7799', 'label' => 'Buttons color'],
           'link_color' => ['default' => '#4A4A4A', 'label' => 'Link color'],
           'link_hover_color' => ['default' => '#3273DC', 'label' => 'Link hover color'],
           'featured_color' => ['default' => '#3D7799', 'label' => 'Featured background'],
@@ -131,59 +136,76 @@ class ThemeManager
         $wpCustomize->add_section('features', ['title' => __('Features', 'rfwpt'), 'priority' => 30]);
         $wpCustomize->add_section('colors', ['title' => __('Colors', 'rfwpt'), 'priority' => 30]);
         
+        /**
+         * Identité du site
+         */
         $wpCustomize->add_control(new WP_Customize_Media_Control($wpCustomize, 'banner_image', [
-            'label' => __('Banner image', 'rfwpt'),
-            'section' => 'title_tagline',
-            'settings' => 'banner_image',
-            'mime_type' => 'image',
-          ]));
+          'label' => __('Banner image', 'rfwpt'),
+          'section' => 'title_tagline',
+          'settings' => 'banner_image',
+          'mime_type' => 'image']));
         $wpCustomize->add_control('banner_height', [
           'label' => __('Banner height', 'rfwpt'),
           'section' => 'title_tagline',
           'settings' => 'banner_height',
           'type' => 'text']);
 
-        $wpCustomize->add_control('show_featured', [
-            'label' => __('Show featured items', 'rfwpt'),
-            'section' => 'features',
-            'settings' => 'show_featured',
-            'type' => 'checkbox']);
-  
-        $wpCustomize->add_control('show_footer', [
-              'label' => __('Show footer', 'rfwpt'),
-              'section' => 'features',
-              'settings' => 'show_footer',
-              'type' => 'checkbox']);
-    
-        $wpCustomize->add_control('show_categories', [
-                'label' => __('Show categories', 'rfwpt'),
-                'section' => 'features',
-                'settings' => 'show_categories',
-                'type' => 'checkbox']);
-
-        $wpCustomize->add_control('fixed_menu', [
-                  'label' => __('Fixed top menu', 'rfwpt'),
-                  'section' => 'features',
-                  'settings' => 'fixed_menu',
-                  'type' => 'checkbox']);
-  
+        /**
+         * Apparence
+         */
         $wpCustomize->add_control(new WP_Customize_Media_Control($wpCustomize, 'background_image_wp', [
           'label' => __('Background image', 'rfwpt'),
           'section' => 'appearance',
           'settings' => 'background_image_wp',
-          'mime_type' => 'image',
-        ]));
+          'mime_type' => 'image']));
         $wpCustomize->add_control('background_under_nav', [
           'label' => __('Background image under principal menu', 'rfwpt'),
           'section' => 'appearance',
           'settings' => 'background_under_nav',
           'type' => 'checkbox']);
         $wpCustomize->add_control('background_image_gradient', [
-            'label' => __('Background image gradient', 'rfwpt'),
-            'section' => 'appearance',
-            'settings' => 'background_image_gradient',
-            'type' => 'checkbox']);
-  
+          'label' => __('Background image gradient', 'rfwpt'),
+          'section' => 'appearance',
+          'settings' => 'background_image_gradient',
+          'type' => 'checkbox']);
+    
+        /**
+         * Capacités
+         */
+        $wpCustomize->add_control('show_featured', [
+          'label' => __('Show featured items', 'rfwpt'),
+          'section' => 'features',
+          'settings' => 'show_featured',
+          'type' => 'checkbox']);
+        $wpCustomize->add_control('show_footer', [
+          'label' => __('Show footer', 'rfwpt'),
+          'section' => 'features',
+          'settings' => 'show_footer',
+          'type' => 'checkbox']);
+        $wpCustomize->add_control('show_categories', [
+          'label' => __('Show categories', 'rfwpt'),
+          'section' => 'features',
+          'settings' => 'show_categories',
+          'type' => 'checkbox']);
+        $wpCustomize->add_control('fixed_menu', [
+          'label' => __('Fixed top menu', 'rfwpt'),
+          'section' => 'features',
+          'settings' => 'fixed_menu',
+          'type' => 'checkbox']);
+        $wpCustomize->add_control('use_custom_excerpt', [
+          'label' => __('Use custome excerpt', 'rfwpt'),
+          'section' => 'features',
+          'settings' => 'use_custom_excerpt',
+          'type' => 'checkbox']);
+        $wpCustomize->add_control('excerpt_size', [
+          'label' => __('Custom excerpt characters size', 'rfwpt'),
+          'section' => 'features',
+          'settings' => 'excerpt_size',
+          'type' => 'text']);
+        
+        /**
+         * Couleurs
+         */
         foreach ($colors as $colorKey => $colorConfig) {
             $wpCustomize->add_control(new WP_Customize_Color_Control($wpCustomize, $colorKey, [
               'label' => __($colorConfig['label'], 'rfwpt'),
@@ -232,7 +254,15 @@ class ThemeManager
         #global-content .section .column:first-child a:hover {
           color: <?php echo get_theme_mod('link_hover_color', '#3273DC'); ?>;
         }
-        /** <?php var_dump(get_theme_mod('background_image_wp', 0)); ?> */
+        #global-content .section .card {
+          background-color: <?php echo get_theme_mod('cards_color', '#FFFFFF'); ?>;
+        }
+        #global-content a.wp-block-file__button,
+        #global-content a.wp-block-file__button:hover {
+          color: <?php echo get_theme_mod('text_buttons_color', '#FFFFFF'); ?> !important;
+          text-decoration: none !important;
+          background-color: <?php echo get_theme_mod('buttons_color', '#3D7799'); ?> !important;
+        }
         <?php
         // Image de fond
         $backgroundImageId = get_theme_mod('background_image_wp', 0);

@@ -35,6 +35,48 @@ class PostManager
     }
 
     /**
+     * Obtenir le résumé en fonction des options
+     */
+    private function getTheExcerpt(): string
+    {
+        if (get_theme_mod('use_custom_excerpt', true)) {
+            $excerptSize = get_theme_mod('excerpt_size', 300);
+            $addHellipsis = false;
+            $contentWithLinks = strip_tags(get_the_content(), '<a>');
+            // Extrait l'ensemble des liens
+            $linksFound = preg_match_all('/<a.*?href="(.*?)".*?>(.*?)<\/a>/', strip_tags($contentWithLinks, '<a>'), $matches);
+            $excerpt = wp_strip_all_tags(get_the_content());
+            // Découpe si besoin le contenu de l'article
+            if (strlen($excerpt) > $excerptSize) {
+                $excerpt = wordwrap($excerpt, $excerptSize, '$$$');
+                // Ne conserve que la première ligne
+                if (strpos($excerpt, '$$$') !== false) {
+                    $excerpt = explode('$$$', $excerpt)[0];
+                }
+                $addHellipsis = true;
+            }
+            // Si des liens se trouvaient dans l'article
+            if ($linksFound > 0) {
+                // Parcours l'ensemble des liens jusqu'à ce qu'un ne soit plus trouver (et donc hors résumé)
+                for ($linkIndex = 0; $linkIndex < $linksFound; ++$linkIndex) {
+                    $linkStrPos = strpos($excerpt, $matches[2][$linkIndex]);
+                    if ($linkStrPos !== false) {
+                        $excerpt = substr_replace($excerpt, $matches[0][$linkIndex], $linkStrPos, strlen($matches[2][$linkIndex]));
+                    } else {
+                        break;
+                    }
+                }
+            }
+            if ($addHellipsis) {
+                $excerpt .= ' [&hellip;]';
+            }
+        } else {
+            $excerpt = get_the_excerpt();
+        }
+        return $excerpt;
+    }
+
+    /**
      * Affiche l'article courant
      * @see PostManager::loadCurrentPost
      */
@@ -52,12 +94,12 @@ class PostManager
               </div>
               <div class="media-content">
                 <p class="title"><?php echo $this->getHtmlPermalink(get_the_title()); ?></p>
-                <p class="content"><?php echo the_excerpt(); ?></p>
+                <p class="content"><?php echo $this->getTheExcerpt(); ?></p>
               </div>
             </div>
           <?php else: ?>
             <div class="title"><?php echo $this->getHtmlPermalink(get_the_title()); ?></div>
-            <div class="content"><?php echo the_excerpt(); ?></div>
+            <div class="content"><?php echo $this->getTheExcerpt(); ?></div>
           <?php endif;
         if (get_theme_mod('show_categories', true)) {
             foreach (wp_get_post_categories(get_the_ID()) as $category) {
