@@ -70,6 +70,7 @@ class PostManager
             if ($addHellipsis) {
                 $excerpt .= ' [&hellip;]';
             }
+            $excerpt = '<p>' . $excerpt . '</p>';
         } else {
             $excerpt = get_the_excerpt();
         }
@@ -109,10 +110,10 @@ class PostManager
         </div>
         <footer class="card-footer">
           <p class="card-footer-item">
-            <span><?php _e('Author') . ' : ' . get_the_author(); ?></span>
+            <span><?php echo __('Author') . ' : ' . get_the_author_meta('display_name'); ?></span>
           </p>
           <p class="card-footer-item">
-            <span><?php echo $this->getHtmlPermalink(__('Read more...', 'rfwpt')); ?></span>
+            <span><?php echo $this->getHtmlPermalink(__('Read more...')); ?></span>
           </p>
           <p class="card-footer-item">
             <span><?php the_date('d/m/Y'); ?></span>

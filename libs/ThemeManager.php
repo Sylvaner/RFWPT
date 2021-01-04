@@ -103,6 +103,7 @@ class ThemeManager
     {
         $wpCustomize->add_setting('show_featured', ['default' => true, 'transport' => 'refresh']);
         $wpCustomize->add_setting('fixed_menu', ['default' => false, 'transport' => 'refresh']);
+        $wpCustomize->add_setting('navbar_shadow', ['default' => true, 'transport' => 'refresh']);
         $wpCustomize->add_setting('banner_image', ['default' => 0, 'transport' => 'refresh']);
         $wpCustomize->add_setting('banner_height', ['default' => '100px', 'transport' => 'refresh']);
         $wpCustomize->add_setting('background_image_wp', ['default' => 0, 'transport' => 'refresh']);
@@ -188,10 +189,15 @@ class ThemeManager
           'settings' => 'show_categories',
           'type' => 'checkbox']);
         $wpCustomize->add_control('fixed_menu', [
-          'label' => __('Fixed top menu', 'rfwpt'),
-          'section' => 'features',
-          'settings' => 'fixed_menu',
-          'type' => 'checkbox']);
+            'label' => __('Fixed top menu', 'rfwpt'),
+            'section' => 'features',
+            'settings' => 'fixed_menu',
+            'type' => 'checkbox']);
+        $wpCustomize->add_control('navbar_shadow', [
+            'label' => __('Show navbar shadow', 'rfwpt'),
+            'section' => 'features',
+            'settings' => 'navbar_shadow',
+            'type' => 'checkbox']);
         $wpCustomize->add_control('use_custom_excerpt', [
           'label' => __('Use custome excerpt', 'rfwpt'),
           'section' => 'features',
@@ -220,8 +226,7 @@ class ThemeManager
      */
     public function showDynamicCss(): void
     {
-        // Couleurs
-       ?>
+        // Couleurs?>
       <style type="text/css">
         #global-content {
           color: <?php echo get_theme_mod('text_color', '#4A4A4A'); ?>;
@@ -263,7 +268,11 @@ class ThemeManager
           text-decoration: none !important;
           background-color: <?php echo get_theme_mod('buttons_color', '#3D7799'); ?> !important;
         }
-        <?php
+        <?php if (get_theme_mod('navbar_shadow', true)): ?>
+        #global-nav {
+          box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.3);
+        }
+        <?php endif;
         // Image de fond
         $backgroundImageId = get_theme_mod('background_image_wp', 0);
         if ($backgroundImageId !== 0 && $backgroundImageId !== '') {
@@ -281,7 +290,7 @@ class ThemeManager
             }
             echo "background-size: cover;}";
         } else {
-            echo '#global-content { background-color: #' . get_theme_mod('background_color', '#E0E0E0') . ';}';
+            echo '#global-content { background-color: ' . get_theme_mod('background_color', '#E0E0E0') . ';}';
         }
         // Affichage d'une bannière
         if (get_theme_mod('banner_image', 0) !== 0 && get_theme_mod('banner_image', 0) !== ''):?>

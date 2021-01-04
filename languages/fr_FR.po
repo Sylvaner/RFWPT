@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: rfwpt 0.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/wp-theme\n"
 "POT-Creation-Date: 2020-12-31 14:01:30+00:00\n"
-"PO-Revision-Date: 2021-01-03 08:49+0100\n"
+"PO-Revision-Date: 2021-01-04 20:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -18,14 +18,6 @@ msgstr ""
 #: index.php:32
 msgid "No post"
 msgstr "Aucun article"
-
-#: libs/PostManager.php:70
-msgid "Author"
-msgstr "Auteur"
-
-#: libs/PostManager.php:73
-msgid "Read more..."
-msgstr "Lire la suite…"
 
 #: libs/ThemeManager.php:76
 msgid "Navigation menu"
@@ -127,6 +119,9 @@ msgstr "Texte de la barre de navigation au survol"
 
 msgid "Fixed top menu"
 msgstr "Menu fixé en haut"
+
+msgid "Show navbar shadow"
+msgstr "Afficher une ombre à la barre de navigation"
 
 msgid "Use custome excerpt"
 msgstr "Utilisé le résumé personnalisé"
