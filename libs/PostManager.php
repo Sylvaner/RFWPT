@@ -35,10 +35,13 @@ class PostManager
     }
 
     /**
-     * Obtenir le résumé en fonction des options
+     * Afficher le résumé en fonction des options
+     *
+     * @return bool True si l'article a été complètement affiché
      */
-    private function getTheExcerpt(): string
+    private function showTheExcerpt(): bool
     {
+        $smallPost = false;
         if (get_theme_mod('use_custom_excerpt', true)) {
             $excerptSize = get_theme_mod('excerpt_size', 300);
             $addHellipsis = false;
@@ -46,6 +49,9 @@ class PostManager
             // Extrait l'ensemble des liens
             $linksFound = preg_match_all('/<a.*?href="(.*?)".*?>(.*?)<\/a>/', strip_tags($contentWithLinks, '<a>'), $matches);
             $excerpt = wp_strip_all_tags(get_the_content());
+            if (strlen($excerpt) < 300) {
+                $smallPost = true;
+            }
             // Découpe si besoin le contenu de l'article
             if (strlen($excerpt) > $excerptSize) {
                 $excerpt = wordwrap($excerpt, $excerptSize, '$$$');
@@ -70,11 +76,14 @@ class PostManager
             if ($addHellipsis) {
                 $excerpt .= ' [&hellip;]';
             }
-            $excerpt = '<p>' . $excerpt . '</p>';
         } else {
             $excerpt = get_the_excerpt();
+            if (strlen(wp_strip_all_tags($excerpt)) === strlen(wp_strip_all_tags(get_the_content()))) {
+                $smallPost = true;
+            }
         }
-        return $excerpt;
+        echo '<p>' . $excerpt . '</p>';
+        return $smallPost;
     }
 
     /**
@@ -95,25 +104,31 @@ class PostManager
               </div>
               <div class="media-content">
                 <p class="title"><?php echo $this->getHtmlPermalink(get_the_title()); ?></p>
-                <p class="content"><?php echo $this->getTheExcerpt(); ?></p>
+                <p class="content"><?php $smallPost = $this->showTheExcerpt(); ?></p>
               </div>
             </div>
           <?php else: ?>
             <div class="title"><?php echo $this->getHtmlPermalink(get_the_title()); ?></div>
-            <div class="content"><?php echo $this->getTheExcerpt(); ?></div>
+            <div class="content"><?php $smallPost = $this->showTheExcerpt(); ?></div>
           <?php endif;
         if (get_theme_mod('show_categories', true)) {
+            echo '<span class="tags">';
             foreach (wp_get_post_categories(get_the_ID()) as $category) {
                 echo '<span class="tag">' . get_category($category)->name . '</span>';
             }
+            echo '</span>';
         } ?>
         </div>
         <footer class="card-footer">
           <p class="card-footer-item">
+            <?php if (get_theme_mod('show_author', true)): ?>
             <span><?php echo __('Author') . ' : ' . get_the_author_meta('display_name'); ?></span>
+            <?php endif; ?>
           </p>
           <p class="card-footer-item">
+            <?php if (!(get_theme_mod('disable_read_more', true) && $smallPost)): ?>
             <span><?php echo $this->getHtmlPermalink(__('Read more...')); ?></span>
+            <?php endif; ?>
           </p>
           <p class="card-footer-item">
             <span><?php the_date('d/m/Y'); ?></span>

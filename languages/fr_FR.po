@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: rfwpt 0.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/wp-theme\n"
 "POT-Creation-Date: 2020-12-31 14:01:30+00:00\n"
-"PO-Revision-Date: 2021-01-04 20:35+0100\n"
+"PO-Revision-Date: 2021-01-05 11:21+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -123,11 +123,20 @@ msgstr "Menu fixé en haut"
 msgid "Show navbar shadow"
 msgstr "Afficher une ombre à la barre de navigation"
 
-msgid "Use custome excerpt"
+msgid "Lists"
+msgstr "Listes"
+
+msgid "Use custom excerpt"
 msgstr "Utilisé le résumé personnalisé"
 
 msgid "Custom excerpt characters size"
 msgstr "Nombre de caractère du résumé personnalisé"
+
+msgid "Disable read more on small posts"
+msgstr "Désactiver Lire la suite sur les petits articles"
+
+msgid "Show author"
+msgstr "Afficher l'auteur"
 
 #. Theme Name of the plugin/theme
 msgid "rfwpt"

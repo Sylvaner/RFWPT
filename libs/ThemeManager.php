@@ -111,6 +111,9 @@ class ThemeManager
         $wpCustomize->add_setting('background_under_nav', ['default' => true, 'transport' => 'refresh']);
         $wpCustomize->add_setting('show_footer', ['default' => true, 'transport' => 'refresh']);
         $wpCustomize->add_setting('show_categories', ['default' => true, 'transport' => 'refresh']);
+
+        $wpCustomize->add_setting('disable_read_more', ['default' => true, 'transport' => 'refresh']);
+        $wpCustomize->add_setting('show_author', ['default' => true, 'transport' => 'refresh']);
         $wpCustomize->add_setting('use_custom_excerpt', ['default' => true, 'transport' => 'refresh']);
         $wpCustomize->add_setting('excerpt_size', ['default' => 300, 'transport' => 'refresh']);
 
@@ -135,6 +138,7 @@ class ThemeManager
 
         $wpCustomize->add_section('appearance', ['title' => __('Appearance', 'rfwpt'), 'priority' => 30]);
         $wpCustomize->add_section('features', ['title' => __('Features', 'rfwpt'), 'priority' => 30]);
+        $wpCustomize->add_section('lists', ['title' => __('Lists', 'rfwpt'), 'priority' => 30]);
         $wpCustomize->add_section('colors', ['title' => __('Colors', 'rfwpt'), 'priority' => 30]);
         
         /**
@@ -198,17 +202,31 @@ class ThemeManager
             'section' => 'features',
             'settings' => 'navbar_shadow',
             'type' => 'checkbox']);
+
+        /**
+         * Listes
+         */
         $wpCustomize->add_control('use_custom_excerpt', [
-          'label' => __('Use custome excerpt', 'rfwpt'),
-          'section' => 'features',
+          'label' => __('Use custom excerpt', 'rfwpt'),
+          'section' => 'lists',
           'settings' => 'use_custom_excerpt',
           'type' => 'checkbox']);
         $wpCustomize->add_control('excerpt_size', [
           'label' => __('Custom excerpt characters size', 'rfwpt'),
-          'section' => 'features',
+          'section' => 'lists',
           'settings' => 'excerpt_size',
           'type' => 'text']);
-        
+        $wpCustomize->add_control('disable_read_more', [
+            'label' => __('Disable read more on small posts', 'rfwpt'),
+            'section' => 'lists',
+            'settings' => 'disable_read_more',
+            'type' => 'checkbox']);
+        $wpCustomize->add_control('show_author', [
+            'label' => __('Show author', 'rfwpt'),
+            'section' => 'lists',
+            'settings' => 'show_author',
+            'type' => 'checkbox']);
+
         /**
          * Couleurs
          */
