@@ -111,11 +111,13 @@ class ThemeManager
         $wpCustomize->add_setting('background_under_nav', ['default' => true, 'transport' => 'refresh']);
         $wpCustomize->add_setting('show_footer', ['default' => true, 'transport' => 'refresh']);
         $wpCustomize->add_setting('show_categories', ['default' => true, 'transport' => 'refresh']);
-
         $wpCustomize->add_setting('disable_read_more', ['default' => true, 'transport' => 'refresh']);
         $wpCustomize->add_setting('show_author', ['default' => true, 'transport' => 'refresh']);
         $wpCustomize->add_setting('use_custom_excerpt', ['default' => true, 'transport' => 'refresh']);
         $wpCustomize->add_setting('excerpt_size', ['default' => 300, 'transport' => 'refresh']);
+        $wpCustomize->add_setting('show_post_data', ['default' => 'bottom', 'transport' => 'refresh']);
+        $wpCustomize->add_setting('show_post_author', ['default' => true, 'transport' => 'refresh']);
+        $wpCustomize->add_setting('show_post_date', ['default' => true, 'transport' => 'refresh']);
 
         $colors = [
           'text_color' => ['default' => '#4A4A4A', 'label' => 'Text color'],
@@ -139,6 +141,7 @@ class ThemeManager
         $wpCustomize->add_section('appearance', ['title' => __('Appearance', 'rfwpt'), 'priority' => 30]);
         $wpCustomize->add_section('features', ['title' => __('Features', 'rfwpt'), 'priority' => 30]);
         $wpCustomize->add_section('lists', ['title' => __('Lists', 'rfwpt'), 'priority' => 30]);
+        $wpCustomize->add_section('posts', ['title' => __('Posts', 'rfwpt'), 'priority' => 30]);
         $wpCustomize->add_section('colors', ['title' => __('Colors', 'rfwpt'), 'priority' => 30]);
         
         /**
@@ -225,6 +228,31 @@ class ThemeManager
             'label' => __('Show author', 'rfwpt'),
             'section' => 'lists',
             'settings' => 'show_author',
+            'type' => 'checkbox']);
+
+        /**
+         * Articles
+         */
+        $wpCustomize->add_setting('show_post_data', ['default' => 'bottom', 'transport' => 'refresh']);
+        $wpCustomize->add_control('show_post_data', [
+            'label' => __('Show post author', 'rfwpt'),
+            'section' => 'posts',
+            'settings' => 'show_post_data',
+            'type' => 'select',
+            'choices' => [
+                'bottom' => __('Bottom', 'rfwpt'),
+                'top' => __('Top', 'rfwpt'),
+                'none' => __('Hide', 'rfwpt')
+            ]]);
+        $wpCustomize->add_control('show_post_author', [
+            'label' => __('Show post author', 'rfwpt'),
+            'section' => 'posts',
+            'settings' => 'show_post_author',
+            'type' => 'checkbox']);
+        $wpCustomize->add_control('show_post_date', [
+            'label' => __('Show post date', 'rfwpt'),
+            'section' => 'posts',
+            'settings' => 'show_post_date',
             'type' => 'checkbox']);
 
         /**

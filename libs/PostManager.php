@@ -157,18 +157,8 @@ class PostManager
      */
     public function showSinglePost(): void
     {
-        ?>
-    <div class="card">
-      <div class="card-content">
-        <div class="title">
-          <?php echo $this->getHtmlPermalink(get_the_title()); ?>
-        </div>
-        <div class="content">
-          <?php the_content(); ?>
-        </div>
-      </div>
-    </div>
-    <?php
+        $this->loadCurrentPost();
+        $this->showContent();
     }
 
     /**
@@ -177,17 +167,49 @@ class PostManager
      */
     public function showPage(): void
     {
+        $this->loadCurrentPost();
+        $this->showContent();
+    }
+
+    /**
+     * Affichage du contenu
+     * @see PostManager::loadCurrentPost
+     */
+    private function showContent(): void
+    {
         ?>
-    <div class="card">
-      <div class="card-content">
-        <div class="title">
-          <?php echo $this->getHtmlPermalink(get_the_title()); ?>
+        <div class="card">
+            <div class="card-content">
+                <div class="title">
+                    <?php echo $this->getHtmlPermalink(get_the_title()); ?>
+                </div>
+                <div class="content">
+                    <?php $this->showPostData('top'); ?>
+                    <?php the_content(); ?>
+                    <?php $this->showPostData('bottom'); ?>
+                </div>
+            </div>
         </div>
-        <div class="content">
-          <?php the_content(); ?>
-        </div>
-      </div>
-    </div>
-    <?php
+        <?php
+    }
+
+    private function showPostData($location): void
+    {
+        $postDataLocation = get_theme_mod('show_post_data', 'bottom');
+        if ($postDataLocation === $location) : ?>
+            <nav class="level">
+                <div class="level-left">
+                <?php
+                if (get_theme_mod('show_post_author', true)) {
+                    echo '<div class="level-item">' . get_the_author_meta('display_name') . '</div>';
+                }
+                echo '</div>';
+                if (get_theme_mod('show_post_date', true)) {
+                    echo '<div class="level-right"><div class="level-item">' . get_the_date('d/m/Y') . '</div></div>';
+                }
+                ?>
+            </nav>
+        <?php
+        endif;
     }
 }
