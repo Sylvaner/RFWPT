@@ -110,6 +110,9 @@ class ThemeManager
         $wpCustomize->add_setting('background_image_gradient', ['default' => true, 'transport' => 'refresh']);
         $wpCustomize->add_setting('background_under_nav', ['default' => true, 'transport' => 'refresh']);
         $wpCustomize->add_setting('show_footer', ['default' => true, 'transport' => 'refresh']);
+        $wpCustomize->add_setting('show_tiles', ['default' => true, 'transport' => 'refresh']);
+        $wpCustomize->add_setting('posts_per_page', ['default' => 20, 'transport' => 'refresh']);
+        $wpCustomize->add_setting('special_category', ['default' => '', 'transport' => 'refresh']);
         $wpCustomize->add_setting('show_categories', ['default' => true, 'transport' => 'refresh']);
         $wpCustomize->add_setting('disable_read_more', ['default' => true, 'transport' => 'refresh']);
         $wpCustomize->add_setting('show_author', ['default' => true, 'transport' => 'refresh']);
@@ -120,13 +123,15 @@ class ThemeManager
         $wpCustomize->add_setting('show_post_date', ['default' => true, 'transport' => 'refresh']);
 
         $colors = [
-          'text_color' => ['default' => '#4A4A4A', 'label' => 'Text color'],
-          'background_color' => ['default' => '#E0E0E0', 'label' => 'Background color'],
-          'cards_color' => ['default' => '#FFFFFF', 'label' => 'Cards color'],
-          'text_buttons_color' => ['default' => '#FFFFFF', 'label' => 'Text buttons color'],
-          'buttons_color' => ['default' => '#3D7799', 'label' => 'Buttons color'],
-          'link_color' => ['default' => '#4A4A4A', 'label' => 'Link color'],
-          'link_hover_color' => ['default' => '#3273DC', 'label' => 'Link hover color'],
+          'text_color' => ['default' => '#4A4A4A', 'label' => 'Text'],
+          'background_color' => ['default' => '#E0E0E0', 'label' => 'Background'],
+          'cards_color' => ['default' => '#FFFFFF', 'label' => 'Cards'],
+          'special_card' => ['default' => '#FFFFFF', 'label' => 'Special category'],
+          'menu_card' => ['default' => '#FFFFFF', 'label' => 'Side menu'],
+          'text_buttons_color' => ['default' => '#FFFFFF', 'label' => 'Text buttons'],
+          'buttons_color' => ['default' => '#3D7799', 'label' => 'Buttons'],
+          'link_color' => ['default' => '#4A4A4A', 'label' => 'Link'],
+          'link_hover_color' => ['default' => '#3273DC', 'label' => 'Link hover'],
           'featured_color' => ['default' => '#3D7799', 'label' => 'Featured background'],
           'featured_text_color' => ['default' => '#FFFFFF', 'label' => 'Featured text'],
           'navbar_background_color' => ['default' => '#FFFFFF', 'label' => 'Navbar background'],
@@ -209,11 +214,36 @@ class ThemeManager
         /**
          * Listes
          */
+        $wpCustomize->add_control('show_tiles', [
+            'label' => __('Show tiles', 'rfwpt'),
+            'section' => 'lists',
+            'settings' => 'show_tiles',
+            'type' => 'checkbox']);
+        $wpCustomize->add_control('posts_per_page', [
+            'label' => __('Posts per page', 'rfwpt'),
+            'section' => 'lists',
+            'settings' => 'posts_per_page',
+            'type' => 'text']);
+        $categoriesChoices = ['' => __('None')];
+        foreach (get_categories() as $category ) {
+            $categoriesChoices[$category->term_id] = $category->name;
+        }
+        $wpCustomize->add_control('special_category', [
+            'label' => __('Special category', 'rfwpt'),
+            'section' => 'lists',
+            'settings' => 'special_category',
+            'type' => 'select',
+            'choices' => $categoriesChoices]);
+        $wpCustomize->add_control('show_tiles', [
+            'label' => __('Show tiles', 'rfwpt'),
+            'section' => 'lists',
+            'settings' => 'show_tiles',
+            'type' => 'checkbox']);
         $wpCustomize->add_control('use_custom_excerpt', [
-          'label' => __('Use custom excerpt', 'rfwpt'),
-          'section' => 'lists',
-          'settings' => 'use_custom_excerpt',
-          'type' => 'checkbox']);
+            'label' => __('Use custom excerpt', 'rfwpt'),
+            'section' => 'lists',
+            'settings' => 'use_custom_excerpt',
+            'type' => 'checkbox']);
         $wpCustomize->add_control('excerpt_size', [
           'label' => __('Custom excerpt characters size', 'rfwpt'),
           'section' => 'lists',
@@ -274,8 +304,9 @@ class ThemeManager
     {
         // Couleurs?>
       <style type="text/css">
-        #global-content {
-          color: <?php echo get_theme_mod('text_color', '#4A4A4A'); ?>;
+        #global-content,
+        #posts-tiles .title {
+          color: <?php echo get_theme_mod('text_color', '#4A4A4A'); ?> !important;
         }
         .featured-menu .card { 
           background-color: <?php echo get_theme_mod('featured_color', '#3D7799'); ?>;
@@ -298,21 +329,32 @@ class ThemeManager
           background-color: <?php echo get_theme_mod('navbar_hover_background_color', '#FAFAFA'); ?>;
           color: <?php echo get_theme_mod('navbar_hover_text_color', '#3273DC'); ?>;
         }
-        #global-content .section .column:first-child a {
+        #global-content .section .column:first-child a,
+        #posts-tiles p a {
           color: <?php echo get_theme_mod('link_color', '#4A4A4A'); ?>;
           text-decoration: underline;
         }
-        #global-content .section .column:first-child a:hover {
+        #global-content .section .column:first-child a:hover,
+        #posts-tiles p a:hover {
           color: <?php echo get_theme_mod('link_hover_color', '#3273DC'); ?>;
         }
-        #global-content .section .card {
+        #global-content .section .card,
+        #posts-tiles article,
+        #pagination {
           background-color: <?php echo get_theme_mod('cards_color', '#FFFFFF'); ?>;
         }
         #global-content a.wp-block-file__button,
-        #global-content a.wp-block-file__button:hover {
+        #global-content a.wp-block-file__button:hover,
+        #pagination .is-current {
           color: <?php echo get_theme_mod('text_buttons_color', '#FFFFFF'); ?> !important;
           text-decoration: none !important;
           background-color: <?php echo get_theme_mod('buttons_color', '#3D7799'); ?> !important;
+        }
+        #special-category>article {
+            background-color: <?php echo get_theme_mod('special_card', '#FFFFFF'); ?> !important;
+        }
+        .column.is-one-fifths .card {
+            background-color: <?php echo get_theme_mod('menu_card', '#FFFFFF'); ?> !important;
         }
         <?php if (get_theme_mod('navbar_shadow', true)): ?>
         #global-nav {

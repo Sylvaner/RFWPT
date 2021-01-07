@@ -5,7 +5,7 @@ Author: Sylvain DANGIN
 Author URI: http://www.sdangin.fr
 Description: Really Free WordPress Theme. Thème Wordpress gratuit et libre sans mauvaise surprise.
 Requires PHP: 7.2
-Version: 0.2
+Version: 0.3
 Text Domain: rfwpt
 License: GNU General Public License v3
 License URI: http://www.gnu.org/licenses/gpl.html
@@ -20,7 +20,8 @@ License URI: http://www.gnu.org/licenses/gpl.html
   height: 100%;
 }
 
-.featured-menu .card:hover {
+.featured-menu .card:hover,
+#posts-tiles .tile.is-child:hover {
   box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, .3), 0 0 0 1px rgba(10, 10, 10, .2);
 }
 
@@ -69,8 +70,35 @@ body,
   margin-bottom: 0.75rem;
 }
 
-#global-content .posts-list .card:hover {
+#global-content #posts-list .card:hover {
   box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, .3), 0 0 0 1px rgba(10, 10, 10, .2);
+}
+
+#posts-tiles .title {
+  font-size: 1.5rem;
+}
+
+#posts-tiles {
+  margin-bottom: 1.5rem;
+}
+
+.tile-footer {
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+#special-category ul {
+  list-style: none;
+  margin-left: 0;
+}
+
+#special-category a {
+  font-size: 0.9rem;
+}
+
+#posts-tiles .is-child {
+  background-position: center;
+  background-size: cover;
 }
 
 .section {
@@ -99,10 +127,12 @@ body {
 }
 
 /** Bouton dans les aperçus **/
-.posts-list .wp-block-file__button {
-	margin-left: 1rem;
-	padding: 0.4rem;
-	border-radius: 0.5rem;
+#posts-list .wp-block-file__button,
+#posts-tiles .wp-block-file__button
+{
+	margin-left: 1rem !important;
+	padding: 0.4rem !important;
+	border-radius: 0.5rem !important;
 }
 
 .column.is-four-fifths-desktop .level {

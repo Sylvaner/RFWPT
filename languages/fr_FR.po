@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: rfwpt 0.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/wp-theme\n"
 "POT-Creation-Date: 2020-12-31 14:01:30+00:00\n"
-"PO-Revision-Date: 2021-01-06 15:45+0100\n"
+"PO-Revision-Date: 2021-01-07 19:51+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -78,25 +78,25 @@ msgstr "Image de fond sous le menu principal"
 msgid "Background image gradient"
 msgstr "Dégradé sur l'image de fond"
 
-msgid "Text color"
+msgid "Text"
 msgstr "Texte"
 
-msgid "Background color"
+msgid "Background"
 msgstr "Fond"
 
-msgid "Cards color"
+msgid "Cards"
 msgstr "Cartes"
 
-msgid "Buttons color"
+msgid "Buttons"
 msgstr "Boutons"
 
-msgid "Text buttons color"
+msgid "Text buttons"
 msgstr "Texte des boutons"
 
-msgid "Link color"
+msgid "Link"
 msgstr "Liens"
 
-msgid "Link hover color"
+msgid "Link hover"
 msgstr "Liens au survol"
 
 msgid "Featured background"
@@ -125,6 +125,9 @@ msgstr "Afficher une ombre à la barre de navigation"
 
 msgid "Lists"
 msgstr "Listes"
+
+msgid "Show tiles"
+msgstr "Afficher des tuiles"
 
 msgid "Use custom excerpt"
 msgstr "Utilisé le résumé personnalisé"
@@ -155,6 +158,12 @@ msgstr "Afficher l'auteur de l'article"
 
 msgid "Show post date"
 msgstr "Afficher la date de l'article"
+
+msgid "Posts per page"
+msgstr "Articles par page"
+
+msgid "Special category"
+msgstr "Catégorie spéciale"
 
 #. Theme Name of the plugin/theme
 msgid "rfwpt"
