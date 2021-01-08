@@ -26,14 +26,17 @@ if (is_front_page()) {
         } elseif (is_single()) {
             $postManager->showSinglePost();
         } else {
-            if (!$postManager->showAllPosts()) : ?>
-            <div class="card">
-              <div class="card-content">
-                <div class="title"><?php _e('No post', 'rfwpt'); ?></div>
-              </div>
-            </div>
+            if (is_home()) {
+                $postManager->showHome();
+            } elseif (!$postManager->showAllPosts()) {
+            ?>
+                <div class="card">
+                    <div class="card-content">
+                        <div class="title"><?php _e('No post', 'rfwpt'); ?></div>
+                    </div>
+                </div>
             <?php
-            endif;
+            }
         }
         ?>
       </div>

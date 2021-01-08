@@ -101,6 +101,13 @@ class ThemeManager
      */
     public function customizeRegister(WP_Customize_Manager $wpCustomize): void
     {
+        $wpCustomize->add_section('appearance', ['title' => __('Appearance', 'rfwpt'), 'priority' => 30]);
+        $wpCustomize->add_section('features', ['title' => __('Features', 'rfwpt'), 'priority' => 30]);
+        $wpCustomize->add_section('home', ['title' => __('Home', 'rfwpt'), 'priority' => 30]);
+        $wpCustomize->add_section('lists', ['title' => __('Lists', 'rfwpt'), 'priority' => 30]);
+        $wpCustomize->add_section('posts', ['title' => __('Posts', 'rfwpt'), 'priority' => 30]);
+        $wpCustomize->add_section('colors', ['title' => __('Colors', 'rfwpt'), 'priority' => 30]);
+
         $wpCustomize->add_setting('show_featured', ['default' => true, 'transport' => 'refresh']);
         $wpCustomize->add_setting('fixed_menu', ['default' => false, 'transport' => 'refresh']);
         $wpCustomize->add_setting('navbar_shadow', ['default' => true, 'transport' => 'refresh']);
@@ -110,6 +117,8 @@ class ThemeManager
         $wpCustomize->add_setting('background_image_gradient', ['default' => true, 'transport' => 'refresh']);
         $wpCustomize->add_setting('background_under_nav', ['default' => true, 'transport' => 'refresh']);
         $wpCustomize->add_setting('show_footer', ['default' => true, 'transport' => 'refresh']);
+        $wpCustomize->add_setting('show_home_mode', ['default' => 'card', 'transport' => 'refresh']);
+        $wpCustomize->add_setting('show_lists_mode', ['default' => 'card', 'transport' => 'refresh']);
         $wpCustomize->add_setting('show_tiles', ['default' => true, 'transport' => 'refresh']);
         $wpCustomize->add_setting('posts_per_page', ['default' => 20, 'transport' => 'refresh']);
         $wpCustomize->add_setting('special_category', ['default' => '', 'transport' => 'refresh']);
@@ -143,12 +152,6 @@ class ThemeManager
             $wpCustomize->add_setting($colorKey, ['default' => $colorConfig['default'], 'transport' => 'refresh']);
         }
 
-        $wpCustomize->add_section('appearance', ['title' => __('Appearance', 'rfwpt'), 'priority' => 30]);
-        $wpCustomize->add_section('features', ['title' => __('Features', 'rfwpt'), 'priority' => 30]);
-        $wpCustomize->add_section('lists', ['title' => __('Lists', 'rfwpt'), 'priority' => 30]);
-        $wpCustomize->add_section('posts', ['title' => __('Posts', 'rfwpt'), 'priority' => 30]);
-        $wpCustomize->add_section('colors', ['title' => __('Colors', 'rfwpt'), 'priority' => 30]);
-        
         /**
          * Identité du site
          */
@@ -212,13 +215,29 @@ class ThemeManager
             'type' => 'checkbox']);
 
         /**
+         * Home
+         */
+        $wpCustomize->add_control('show_home_mode', [
+            'label' => __('Show home mode', 'rfwpt'),
+            'section' => 'home',
+            'settings' => 'show_home_mode',
+            'type' => 'select',
+            'choices' => [
+                'cards' => __('Cards', 'rfwpt'),
+                'tiles' => __('Tiles', 'rfwpt')
+            ]]);
+        /**
          * Listes
          */
-        $wpCustomize->add_control('show_tiles', [
-            'label' => __('Show tiles', 'rfwpt'),
+        $wpCustomize->add_control('show_lists_mode', [
+            'label' => __('Show lists mode', 'rfwpt'),
             'section' => 'lists',
-            'settings' => 'show_tiles',
-            'type' => 'checkbox']);
+            'settings' => 'show_lists_mode',
+            'type' => 'select',
+            'choices' => [
+                'cards' => __('Cards', 'rfwpt'),
+                'tiles' => __('Tiles', 'rfwpt')
+            ]]);
         $wpCustomize->add_control('posts_per_page', [
             'label' => __('Posts per page', 'rfwpt'),
             'section' => 'lists',
