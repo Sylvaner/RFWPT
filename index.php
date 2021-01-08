@@ -21,10 +21,8 @@ if (is_front_page()) {
       <div class="column is-four-fifths-desktop">
         <?php
         $postManager = new PostManager();
-        if (is_page()) {
-            $postManager->showPage();
-        } elseif (is_single()) {
-            $postManager->showSinglePost();
+        if (is_page() || is_single()) {
+            $postManager->showSingle();
         } else {
             if (is_home()) {
                 $postManager->showHome();

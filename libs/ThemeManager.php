@@ -108,21 +108,24 @@ class ThemeManager
         $wpCustomize->add_section('posts', ['title' => __('Posts', 'rfwpt'), 'priority' => 30]);
         $wpCustomize->add_section('colors', ['title' => __('Colors', 'rfwpt'), 'priority' => 30]);
 
-        $wpCustomize->add_setting('show_featured', ['default' => true, 'transport' => 'refresh']);
-        $wpCustomize->add_setting('fixed_menu', ['default' => false, 'transport' => 'refresh']);
-        $wpCustomize->add_setting('navbar_shadow', ['default' => true, 'transport' => 'refresh']);
         $wpCustomize->add_setting('banner_image', ['default' => 0, 'transport' => 'refresh']);
         $wpCustomize->add_setting('banner_height', ['default' => '100px', 'transport' => 'refresh']);
+
         $wpCustomize->add_setting('background_image_wp', ['default' => 0, 'transport' => 'refresh']);
         $wpCustomize->add_setting('background_image_gradient', ['default' => true, 'transport' => 'refresh']);
         $wpCustomize->add_setting('background_under_nav', ['default' => true, 'transport' => 'refresh']);
+
+        $wpCustomize->add_setting('show_featured', ['default' => true, 'transport' => 'refresh']);
         $wpCustomize->add_setting('show_footer', ['default' => true, 'transport' => 'refresh']);
-        $wpCustomize->add_setting('show_home_mode', ['default' => 'card', 'transport' => 'refresh']);
-        $wpCustomize->add_setting('show_lists_mode', ['default' => 'card', 'transport' => 'refresh']);
-        $wpCustomize->add_setting('show_tiles', ['default' => true, 'transport' => 'refresh']);
-        $wpCustomize->add_setting('posts_per_page', ['default' => 20, 'transport' => 'refresh']);
-        $wpCustomize->add_setting('special_category', ['default' => '', 'transport' => 'refresh']);
         $wpCustomize->add_setting('show_categories', ['default' => true, 'transport' => 'refresh']);
+        $wpCustomize->add_setting('fixed_menu', ['default' => false, 'transport' => 'refresh']);
+        $wpCustomize->add_setting('navbar_shadow', ['default' => true, 'transport' => 'refresh']);
+
+        $wpCustomize->add_setting('show_home_mode', ['default' => 'cards', 'transport' => 'refresh']);
+        $wpCustomize->add_setting('special_category', ['default' => '', 'transport' => 'refresh']);
+
+        $wpCustomize->add_setting('show_lists_mode', ['default' => 'cards', 'transport' => 'refresh']);
+        $wpCustomize->add_setting('posts_per_page', ['default' => 20, 'transport' => 'refresh']);
         $wpCustomize->add_setting('disable_read_more', ['default' => true, 'transport' => 'refresh']);
         $wpCustomize->add_setting('show_author', ['default' => true, 'transport' => 'refresh']);
         $wpCustomize->add_setting('use_custom_excerpt', ['default' => true, 'transport' => 'refresh']);
@@ -135,7 +138,7 @@ class ThemeManager
           'text_color' => ['default' => '#4A4A4A', 'label' => 'Text'],
           'background_color' => ['default' => '#E0E0E0', 'label' => 'Background'],
           'cards_color' => ['default' => '#FFFFFF', 'label' => 'Cards'],
-          'special_card' => ['default' => '#FFFFFF', 'label' => 'Special category'],
+          'special_card' => ['default' => '#FFFFFF', 'label' => 'Special category', 'active_callback' => 'specialCategoryCallback'],
           'menu_card' => ['default' => '#FFFFFF', 'label' => 'Side menu'],
           'text_buttons_color' => ['default' => '#FFFFFF', 'label' => 'Text buttons'],
           'buttons_color' => ['default' => '#3D7799', 'label' => 'Buttons'],
@@ -164,7 +167,8 @@ class ThemeManager
           'label' => __('Banner height', 'rfwpt'),
           'section' => 'title_tagline',
           'settings' => 'banner_height',
-          'type' => 'text']);
+          'type' => 'text',
+          'active_callback' => [$this, 'activeBannerCallback']]);
 
         /**
          * Apparence
@@ -178,13 +182,15 @@ class ThemeManager
           'label' => __('Background image under principal menu', 'rfwpt'),
           'section' => 'appearance',
           'settings' => 'background_under_nav',
-          'type' => 'checkbox']);
+          'type' => 'checkbox',
+          'active_callback' => [$this, 'activeBackgroundCallback']]);
         $wpCustomize->add_control('background_image_gradient', [
           'label' => __('Background image gradient', 'rfwpt'),
           'section' => 'appearance',
           'settings' => 'background_image_gradient',
-          'type' => 'checkbox']);
-    
+          'type' => 'checkbox',
+          'active_callback' => [$this, 'activeBackgroundCallback']]);
+
         /**
          * Capacités
          */
@@ -226,6 +232,18 @@ class ThemeManager
                 'cards' => __('Cards', 'rfwpt'),
                 'tiles' => __('Tiles', 'rfwpt')
             ]]);
+        $categoriesChoices = ['' => __('None')];
+        foreach (get_categories() as $category ) {
+            $categoriesChoices[$category->term_id] = $category->name;
+        }
+        $wpCustomize->add_control('special_category', [
+            'label' => __('Special category', 'rfwpt'),
+            'section' => 'home',
+            'settings' => 'special_category',
+            'type' => 'select',
+            'choices' => $categoriesChoices,
+            'active_callback' => [$this, 'homeModeTilesCallback']]);
+
         /**
          * Listes
          */
@@ -243,21 +261,6 @@ class ThemeManager
             'section' => 'lists',
             'settings' => 'posts_per_page',
             'type' => 'text']);
-        $categoriesChoices = ['' => __('None')];
-        foreach (get_categories() as $category ) {
-            $categoriesChoices[$category->term_id] = $category->name;
-        }
-        $wpCustomize->add_control('special_category', [
-            'label' => __('Special category', 'rfwpt'),
-            'section' => 'lists',
-            'settings' => 'special_category',
-            'type' => 'select',
-            'choices' => $categoriesChoices]);
-        $wpCustomize->add_control('show_tiles', [
-            'label' => __('Show tiles', 'rfwpt'),
-            'section' => 'lists',
-            'settings' => 'show_tiles',
-            'type' => 'checkbox']);
         $wpCustomize->add_control('use_custom_excerpt', [
             'label' => __('Use custom excerpt', 'rfwpt'),
             'section' => 'lists',
@@ -267,7 +270,8 @@ class ThemeManager
           'label' => __('Custom excerpt characters size', 'rfwpt'),
           'section' => 'lists',
           'settings' => 'excerpt_size',
-          'type' => 'text']);
+          'type' => 'text',
+          'active_callback' => [$this, 'customExcerptCallback']]);
         $wpCustomize->add_control('disable_read_more', [
             'label' => __('Disable read more on small posts', 'rfwpt'),
             'section' => 'lists',
@@ -308,11 +312,15 @@ class ThemeManager
          * Couleurs
          */
         foreach ($colors as $colorKey => $colorConfig) {
-            $wpCustomize->add_control(new WP_Customize_Color_Control($wpCustomize, $colorKey, [
-              'label' => __($colorConfig['label'], 'rfwpt'),
-              'section' => 'colors',
-              'settings' => $colorKey
-            ]));
+            $colorControl = [
+                'label' => __($colorConfig['label'], 'rfwpt'),
+                'section' => 'colors',
+                'settings' => $colorKey
+            ];
+            if (array_key_exists('active_callback', $colorConfig)) {
+                $colorControl['active_callback'] = [$this, $colorConfig['active_callback']];
+            }
+            $wpCustomize->add_control(new WP_Customize_Color_Control($wpCustomize, $colorKey, $colorControl));
         }
     }
 
@@ -412,5 +420,31 @@ class ThemeManager
         } ?>
       </style>
     <?php
+    }
+
+    public function activeBannerCallback($control): bool
+    {
+        return $control->manager->get_setting('banner_image')->value() !== '';
+    }
+
+    public function activeBackgroundCallback($control): bool
+    {
+        return $control->manager->get_setting('background_image_wp')->value() !== '';
+    }
+
+    public function homeModeTilesCallback($control): bool
+    {
+        return $control->manager->get_setting('show_home_mode')->value() === 'tiles';
+    }
+
+    public function specialCategoryCallback($control): bool
+    {
+        return $control->manager->get_setting('show_home_mode')->value() === 'tiles' &&
+               $control->manager->get_setting('special_category')->value() !== '';
+    }
+
+    public function customExcerptCallback($control): bool
+    {
+        return $control->manager->get_setting('use_custom_excerpt')->value();
     }
 }
