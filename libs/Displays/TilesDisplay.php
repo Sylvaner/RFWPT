@@ -102,7 +102,7 @@ class TilesDisplay extends BaseDisplay
     {
         $thumbnailUrl = get_the_post_thumbnail_url(get_the_ID(), '128'); ?>
         <div class="tile is-parent">
-            <article class="tile box is-child"<?php if (!empty($thumbnailUrl)): ?> style="background: linear-gradient(#FFFFFFCC, #FFFFFFCC), url('<?php echo $thumbnailUrl; ?>');"<?php endif; ?>>
+            <article class="tile box is-child"<?php if (!empty($thumbnailUrl)): ?> style="background: linear-gradient(#FFFFFFDD, #FFFFFFDD), url('<?php echo $thumbnailUrl; ?>');"<?php endif; ?>>
                 <div class="title">
                     <?php echo $this->getHtmlPermalink(get_the_title()); ?>
                 </div>

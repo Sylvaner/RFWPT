@@ -105,8 +105,8 @@ body,
 }
 
 #posts-tiles .is-child {
-  background-position: center;
-  background-size: cover;
+  background-position: center !important;
+  background-size: cover !important;
 }
 
 .section {
