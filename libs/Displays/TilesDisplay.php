@@ -81,9 +81,10 @@ class TilesDisplay extends BaseDisplay
     {
         $postCount = 0;
         // Affichage simple avec 3 articles par ligne
+        echo '<div id="posts-tiles" class="tile is-ancestor is-vertical">';
         while ($this->posts->have_posts()) {
             if ($postCount % 3 === 0) {
-                echo '<div id="posts-tiles" class="tile is-horizontal is-12">';
+                echo '<div class="tile is-horizontal is-12">';
             }
             $this->posts->the_post();
             $this->showPostTile();
@@ -92,6 +93,10 @@ class TilesDisplay extends BaseDisplay
                 echo '</div>';
             }
         }
+        if ($postCount % 3 !== 0) {
+            echo '</div>';
+        }
+        echo '</div>';
         return $postCount !== 0;
     }
 
