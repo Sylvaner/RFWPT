@@ -20,7 +20,7 @@ class BaseDisplay
      * @param array $args Arguments de la requête
      */
     public function __construct(array $args = []) {
-        $this->query($args);
+        $this->initialQuery($args);
     }
 
     /**
@@ -28,7 +28,7 @@ class BaseDisplay
      *
      * @param array $args Arguments initiaux
      */
-    protected function query(array $args = []): void
+    protected function initialQuery(array $args = []): void
     {
         $postsPerPage = get_theme_mod('posts_per_page', 20);
         $this->currentPage = max(1, intval(get_query_var('paged')));
@@ -196,5 +196,25 @@ class BaseDisplay
             }
             echo '</span>';
         }
+    }
+
+    /**
+     * Obtenir l'url de la miniature de l'image mise en avant
+     *
+     * @param int $size Taille de la miniature
+     *
+     * @return string URL
+     */
+    protected function getThumbnailUrl(int $size = 128): string
+    {
+        return get_the_post_thumbnail_url(get_the_ID(), $size);
+    }
+
+    /**
+     * Affiche un articles dans la zone de la catégorie spéciale
+     */
+    protected function showListPost(): void
+    {
+        echo '<li><span class="tag">' . get_the_date('d/m/Y') . '</span> - ' . $this->getHtmlPermalink(get_the_title()) . '</li>';
     }
 }

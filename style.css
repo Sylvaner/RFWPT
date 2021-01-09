@@ -74,6 +74,14 @@ body,
   box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, .3), 0 0 0 1px rgba(10, 10, 10, .2);
 }
 
+#posts-list .card {
+  margin-bottom: 1rem;
+}
+
+#global-content > .container {
+  margin-top: 1rem;
+}
+
 #posts-tiles .title {
   font-size: 1.5rem;
 }
@@ -87,12 +95,12 @@ body,
   opacity: 0.8;
 }
 
-#special-category ul {
+.promoted-category ul {
   list-style: none;
   margin-left: 0;
 }
 
-#special-category a {
+.promoted-category a {
   font-size: 0.9rem;
 }
 
@@ -127,8 +135,8 @@ body {
 }
 
 /** Bouton dans les aperçus **/
-#posts-list .wp-block-file__button,
-#posts-tiles .wp-block-file__button
+.card .wp-block-file__button,
+.tile .wp-block-file__button
 {
 	margin-left: 1rem !important;
 	padding: 0.4rem !important;
@@ -137,4 +145,26 @@ body {
 
 .column.is-four-fifths-desktop .level {
   opacity: 0.8;
+}
+
+#condensed .promoted-category {
+  margin-top: 1rem;
+  height: 100%;
+}
+
+#condensed .columns {
+  margin-bottom: 2rem;
+}
+
+.slideshow {
+  height: 20rem;
+}
+
+.slideshow .card {
+  height: 100%;
+}
+
+.slideshow .tags {
+  position: absolute;
+  bottom: 3rem;
 }

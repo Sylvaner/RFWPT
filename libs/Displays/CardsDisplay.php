@@ -33,7 +33,7 @@ class CardsDisplay extends BaseDisplay
      */
     private function showCurrentPostSummary(): void
     {
-        $thumbnailUrl = get_the_post_thumbnail_url(get_the_ID(), '128'); ?>
+        $thumbnailUrl = $this->getThumbnailUrl(); ?>
         <div class="card">
             <div class="card-content">
                 <?php if ($thumbnailUrl): ?>
@@ -58,7 +58,7 @@ class CardsDisplay extends BaseDisplay
             <footer class="card-footer">
                 <p class="card-footer-item">
                     <?php if (get_theme_mod('show_author', true)): ?>
-                        <span><?php echo __('Author') . ' : ' . get_the_author_meta('display_name'); ?></span>
+                        <span><?php echo get_the_author_meta('display_name'); ?></span>
                     <?php endif; ?>
                 </p>
                 <p class="card-footer-item">

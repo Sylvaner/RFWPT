@@ -19,13 +19,27 @@ class PostManager
                 break;
             case 'tiles':
                 require 'Displays/TilesDisplay.php';
-                $specialCategory = get_theme_mod('special_category', '');
+                $specialCategory = get_theme_mod('promoted_category1', '');
                 if ($specialCategory === '') {
                     (new TilesDisplay())->showAllPosts();
                 } else {
                     $display = new TilesDisplay(['cat' => '-' . $specialCategory]);
                     $display->showHome(intval($specialCategory));
                 }
+                break;
+            case 'condensed':
+                require 'Displays/CondensedDisplay.php';
+                $promotedCategory1 = get_theme_mod('promoted_category1', '');
+                $promotedCategory2 = get_theme_mod('promoted_category2', '');
+                $filter = '';
+                if ($promotedCategory1 !== '') {
+                    $filter .= '-' . $promotedCategory1;
+                    if ($promotedCategory2 !== '') {
+                        $filter .= ',-' . $promotedCategory2;
+                    }
+                }
+                $display = new CondensedDisplay(['cat' => $filter]);
+                $display->showHome(intval($promotedCategory1), intval($promotedCategory2));
                 break;
         }
     }

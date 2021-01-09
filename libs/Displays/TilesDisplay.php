@@ -8,7 +8,7 @@ require_once('BaseDisplay.php');
 class TilesDisplay extends BaseDisplay
 {
     /**
-     * Affiche l'intégralité des articles avec des tuiles
+     * Affiche la page d'accueil avec des tuiles
      *
      * @param int $specialCategory Catégorie spéciale sélectionnée
      *
@@ -38,17 +38,17 @@ class TilesDisplay extends BaseDisplay
                     echo '</div>';
                     // Affichage de la catégorie spéciale
                     if ($postCount === 4) {
-                        $specialPosts = new WP_Query(
+                        $promotedPosts = new WP_Query(
                             [
                                 'posts_per_page' => 10,
                                 'cat' => $specialCategory
                             ]);
-                        echo '</div><div id="special-category" class="tile is-parent"><article class="tile is-child box"><div class="content">';
+                        echo '</div><div class="promoted-category tile is-parent"><article class="tile is-child box"><div class="content">';
                         echo '<p class="title">' . get_cat_name($specialCategory) . '</p>';
                         echo '<div class="content"><ul>';
-                        while ($specialPosts->have_posts()) {
-                            $this->showSpecialPost();
-                            $specialPosts->the_post();
+                        while ($promotedPosts->have_posts()) {
+                            $this->showListPost();
+                            $promotedPosts->the_post();
                         }
                         echo '</ul></div></div></article></div></div>';
                     }
@@ -93,14 +93,6 @@ class TilesDisplay extends BaseDisplay
             }
         }
         return $postCount !== 0;
-    }
-
-    /**
-     * Affiche un articles dans la zone de la catégorie spéciale
-     */
-    private function showSpecialPost(): void
-    {
-        echo '<li><span class="tag">' . get_the_date('d/m/Y') . '</span> - ' . $this->getHtmlPermalink(get_the_title()) . '</li>';
     }
 
     /**
