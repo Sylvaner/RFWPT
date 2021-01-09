@@ -138,7 +138,7 @@ class ThemeManager
 
         $colors = [
           'text_color' => ['default' => '#4A4A4A', 'label' => 'Text'],
-          'background_color' => ['default' => '#E0E0E0', 'label' => 'Background'],
+          'background_color_wp' => ['default' => '#E0E0E0', 'label' => 'Background'],
           'cards_color' => ['default' => '#FFFFFF', 'label' => 'Cards'],
           'special_card' => ['default' => '#FFFFFF', 'label' => 'Special category', 'active_callback' => 'promotedCategory1Callback'],
           'menu_card' => ['default' => '#FFFFFF', 'label' => 'Side menu'],
@@ -395,7 +395,8 @@ class ThemeManager
         #special-category>article {
             background-color: <?php echo get_theme_mod('special_card', '#FFFFFF'); ?> !important;
         }
-        .column.is-one-fifths .card {
+        .column.is-one-fifths .card,
+        .column.is-three-quarters .card {
             background-color: <?php echo get_theme_mod('menu_card', '#FFFFFF'); ?> !important;
         }
         <?php if (get_theme_mod('navbar_shadow', true)): ?>
@@ -420,7 +421,7 @@ class ThemeManager
             }
             echo "background-size: cover;}";
         } else {
-            echo '#global-content { background-color: ' . get_theme_mod('background_color', '#E0E0E0') . ';}';
+            echo '#global-content { background-color: ' . get_theme_mod('background_color_wp', '#E0E0E0') . ';}';
         }
         // Affichage d'une bannière
         if (get_theme_mod('banner_image', 0) !== 0 && get_theme_mod('banner_image', 0) !== ''):?>
