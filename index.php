@@ -38,7 +38,7 @@ if (is_front_page()) {
         }
         ?>
       </div>
-      <div class="column">
+      <div id="side-menu" class="column">
         <div class="card">
           <div class="card-content">
             <aside class="menu">

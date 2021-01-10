@@ -148,6 +148,10 @@ body {
   opacity: 0.8;
 }
 
+#side-menu {
+  margin-bottom: 1rem;
+}
+
 #condensed .promoted-category {
   margin-top: 1rem;
   height: 100%;
