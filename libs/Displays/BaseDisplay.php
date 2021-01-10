@@ -121,7 +121,6 @@ class BaseDisplay
 
     /**
      * Obtenir le code HTML d'un lien vers l'article courant
-     * @see PostManager::loadCurrentPost
      *
      * @param string $title Titre du lien
      *

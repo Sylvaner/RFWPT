@@ -77,7 +77,7 @@ class Menus
     {
         echo '<a class="' . $cssClass . '" href="' . $menuItem['url'] . '"';
         if ($menuItem['target'] !== '') {
-            echo ' target="' . $target . '"';
+            echo ' target="' . $menuItem['target'] . '"';
         }
         echo '>' . $menuItem['title'] . '</a>';
     }
@@ -143,9 +143,9 @@ class Menus
                   <a <?php echo $link; ?>>
                     <div class="card">
                       <div class="card-content">
-                        <?php if ($icons !== '') {
-                    echo $icon;
-                } ?>
+                        <?php if ($icon !== '') {
+                                echo $icon;
+                            } ?>
                         <p class="title"><?php echo $title; ?></p>
                       </div>
                     </div>

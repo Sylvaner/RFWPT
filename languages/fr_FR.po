@@ -1,174 +1,210 @@
-# Copyright (C) 2020 Sylvain DANGIN
-# This file is distributed under the same license as the rfwpt package.
+# Copyright (C) 2021 Sylvain DANGIN
+# This file is distributed under the GNU General Public License v3.
 msgid ""
 msgstr ""
-"Project-Id-Version: rfwpt 0.1\n"
+"Project-Id-Version: RFWPT 0.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/wp-theme\n"
-"POT-Creation-Date: 2020-12-31 14:01:30+00:00\n"
-"PO-Revision-Date: 2021-01-07 19:51+0100\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: fr_FR\n"
+"POT-Creation-Date: 2021-01-10 19:23:22+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2021-01-10 20:29+0100\n"
+"Language-Team: \n"
 "X-Generator: Poedit 2.4.2\n"
+"Last-Translator: \n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr_FR\n"
 
-#: index.php:32
+#: index.php:33
 msgid "No post"
 msgstr "Aucun article"
 
-#: libs/ThemeManager.php:76
+#: libs/Displays/BaseDisplay.php:89
+msgid "Previous"
+msgstr "Précédent"
+
+#: libs/Displays/BaseDisplay.php:96
+msgid "Next"
+msgstr "Suivante"
+
+#: libs/Displays/CardsDisplay.php:66
+msgid "Read more..."
+msgstr "Lire la suite…"
+
+#: libs/ThemeManager.php:70
 msgid "Navigation menu"
 msgstr "Menu de navigation"
 
-#: libs/ThemeManager.php:77
+#: libs/ThemeManager.php:71
 msgid "Featured items"
 msgstr "Eléments en avant"
 
-#: libs/ThemeManager.php:78
+#: libs/ThemeManager.php:72
 msgid "Footer menu"
 msgstr "Menu du pied de page"
 
-#: libs/ThemeManager.php:80
+#: libs/ThemeManager.php:74
 msgid "Side menu"
 msgstr "Menu latéral"
 
-#: libs/ThemeManager.php:126
+#: libs/ThemeManager.php:96
 msgid "Appearance"
 msgstr "Apparence"
 
-#: libs/ThemeManager.php:127
+#: libs/ThemeManager.php:97
 msgid "Features"
 msgstr "Caractéristiques"
 
-#: libs/ThemeManager.php:128
-msgid "Colors"
-msgstr "Couleurs"
+#: libs/ThemeManager.php:98
+msgid "Home"
+msgstr "Accueil"
 
-#: libs/ThemeManager.php:131
-msgid "Banner image"
-msgstr "Image bannière"
-
-#: libs/ThemeManager.php:137
-msgid "Banner height"
-msgstr "Hauteur de la bannière"
-
-#: libs/ThemeManager.php:143
-msgid "Show featured items"
-msgstr "Afficher les éléments en avant"
-
-#: libs/ThemeManager.php:149
-msgid "Show footer"
-msgstr "Afficher le pied de page"
-
-#: libs/ThemeManager.php:155
-msgid "Show categories"
-msgstr "Afficher les catégories"
-
-#: libs/ThemeManager.php:161
-msgid "Background image"
-msgstr "Image de fond"
-
-#: libs/ThemeManager.php:167
-msgid "Background image under principal menu"
-msgstr "Image de fond sous le menu principal"
-
-msgid "Background image gradient"
-msgstr "Dégradé sur l'image de fond"
-
-msgid "Text"
-msgstr "Texte"
-
-msgid "Background"
-msgstr "Fond"
-
-msgid "Cards"
-msgstr "Cartes"
-
-msgid "Buttons"
-msgstr "Boutons"
-
-msgid "Text buttons"
-msgstr "Texte des boutons"
-
-msgid "Link"
-msgstr "Liens"
-
-msgid "Link hover"
-msgstr "Liens au survol"
-
-msgid "Featured background"
-msgstr "Fond des éléments en avant"
-
-msgid "Featured text"
-msgstr "Texte des éléments en avant"
-
-msgid "Navbar background"
-msgstr "Fond de la barre de navigation"
-
-msgid "Navbar text"
-msgstr "Texte de la barre de navigation"
-
-msgid "Navbar hover background"
-msgstr "Fond de la barre de navigation au survol"
-
-msgid "Navbar hover text"
-msgstr "Texte de la barre de navigation au survol"
-
-msgid "Fixed top menu"
-msgstr "Menu fixé en haut"
-
-msgid "Show navbar shadow"
-msgstr "Afficher une ombre à la barre de navigation"
-
+#: libs/ThemeManager.php:99
 msgid "Lists"
 msgstr "Listes"
 
-msgid "Show tiles"
-msgstr "Afficher des tuiles"
-
-msgid "Use custom excerpt"
-msgstr "Utilisé le résumé personnalisé"
-
-msgid "Custom excerpt characters size"
-msgstr "Nombre de caractère du résumé personnalisé"
-
-msgid "Disable read more on small posts"
-msgstr "Désactiver Lire la suite sur les petits articles"
-
-msgid "Show author"
-msgstr "Afficher l'auteur"
-
+#: libs/ThemeManager.php:100
 msgid "Posts"
 msgstr "Articles"
 
-msgid "Bottom"
-msgstr "En bas"
+#: libs/ThemeManager.php:101
+msgid "Colors"
+msgstr "Couleurs"
 
-msgid "Top"
-msgstr "En haut"
+#: libs/ThemeManager.php:157
+msgid "Banner image"
+msgstr "Image bannière"
 
-msgid "Hide"
-msgstr "Cacher"
+#: libs/ThemeManager.php:162
+msgid "Banner height"
+msgstr "Hauteur de la bannière"
 
-msgid "Show post author"
-msgstr "Afficher l'auteur de l'article"
+#: libs/ThemeManager.php:172
+msgid "Background image"
+msgstr "Image de fond"
 
-msgid "Show post date"
-msgstr "Afficher la date de l'article"
+#: libs/ThemeManager.php:177
+msgid "Background image under principal menu"
+msgstr "Image de fond sous le menu principal"
 
+#: libs/ThemeManager.php:183
+msgid "Background image gradient"
+msgstr "Dégradé sur l'image de fond"
+
+#: libs/ThemeManager.php:189
+msgid "Show central column"
+msgstr "Afficher une colonne centrale"
+
+#: libs/ThemeManager.php:198
+msgid "Show featured items"
+msgstr "Afficher les éléments en avant"
+
+#: libs/ThemeManager.php:203
+msgid "Show footer"
+msgstr "Afficher le pied de page"
+
+#: libs/ThemeManager.php:208
+msgid "Show categories"
+msgstr "Afficher les catégories"
+
+#: libs/ThemeManager.php:213
+msgid "Fixed top menu"
+msgstr "Menu fixé en haut"
+
+#: libs/ThemeManager.php:218
+msgid "Show navbar shadow"
+msgstr "Afficher une ombre à la barre de navigation"
+
+#: libs/ThemeManager.php:227
+msgid "Show home mode"
+msgstr "Accueil"
+
+#: libs/ThemeManager.php:232 libs/ThemeManager.php:264
+msgid "Cards"
+msgstr "Cartes"
+
+#: libs/ThemeManager.php:233 libs/ThemeManager.php:265
+msgid "Tiles"
+msgstr "Afficher des tuiles"
+
+#: libs/ThemeManager.php:234
+msgid "Condensed"
+msgstr "Condensé"
+
+#: libs/ThemeManager.php:236
+msgid "None"
+msgstr "Aucun"
+
+#: libs/ThemeManager.php:241
+msgid "Promoted category 1"
+msgstr "Catégorie spéciale"
+
+#: libs/ThemeManager.php:248
+msgid "Promoted category 2"
+msgstr "Catégorie spéciale"
+
+#: libs/ThemeManager.php:259
+msgid "Show lists mode"
+msgstr "Listes"
+
+#: libs/ThemeManager.php:268
 msgid "Posts per page"
 msgstr "Articles par page"
 
-msgid "Special category"
-msgstr "Catégorie spéciale"
+#: libs/ThemeManager.php:273
+msgid "Use custom excerpt"
+msgstr "Utilisé le résumé personnalisé"
+
+#: libs/ThemeManager.php:278
+msgid "Custom excerpt characters size"
+msgstr "Nombre de caractère du résumé personnalisé"
+
+#: libs/ThemeManager.php:284
+msgid "Disable read more on small posts"
+msgstr "Désactiver Lire la suite sur les petits articles"
+
+#: libs/ThemeManager.php:289
+msgid "Show author"
+msgstr "Afficher l'auteur"
+
+#: libs/ThemeManager.php:299 libs/ThemeManager.php:309
+msgid "Show post author"
+msgstr "Afficher l'auteur de l'article"
+
+#: libs/ThemeManager.php:304
+msgid "Bottom"
+msgstr "En bas"
+
+#: libs/ThemeManager.php:305
+msgid "Top"
+msgstr "En haut"
+
+#: libs/ThemeManager.php:306
+msgid "Hide"
+msgstr "Cacher"
+
+#: libs/ThemeManager.php:314
+msgid "Show post date"
+msgstr "Afficher la date de l'article"
 
 #. Theme Name of the plugin/theme
-msgid "rfwpt"
-msgstr "rfwpt"
+msgid "RFWPT"
+msgstr ""
+
+#. Theme URI of the plugin/theme
+msgid "https://github.com/Sylvaner/RFWPT"
+msgstr "https://github.com/Sylvaner/RFWPT"
+
+#. Description of the plugin/theme
+msgid ""
+"Really Free WordPress Theme. Thème Wordpress gratuit et libre sans mauvaise "
+"surprise."
+msgstr ""
 
 #. Author of the plugin/theme
 msgid "Sylvain DANGIN"
-msgstr "Sylvain DANGIN"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://www.sdangin.fr"
+msgstr ""

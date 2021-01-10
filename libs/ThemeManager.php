@@ -13,7 +13,13 @@ class ThemeManager
      */
     private function __construct()
     {
-        $this->init();
+        $this->addStyles();
+        $this->addScripts();
+        $this->registerMenus();
+        $this->actions();
+        $this->addGlobalFeatures();
+        // Chargement des traductions
+        load_theme_textdomain('rfwpt', get_template_directory() . '/languages');
     }
 
     /**
@@ -25,20 +31,6 @@ class ThemeManager
             self::$instance = new ThemeManager();
         }
         return self::$instance;
-    }
-
-    /**
-     * Initialise l'ensemble des éléments
-     */
-    private function init(): void
-    {
-        $this->addStyles();
-        $this->addScripts();
-        $this->registerMenus();
-        $this->actions();
-        $this->addGlobalFeatures();
-        // Chargement des traductions
-        load_theme_textdomain('rfwpt', get_template_directory() . '/languages');
     }
 
     /**
@@ -140,7 +132,8 @@ class ThemeManager
           'text_color' => ['default' => '#4A4A4A', 'label' => 'Text'],
           'background_color_wp' => ['default' => '#E0E0E0', 'label' => 'Background'],
           'cards_color' => ['default' => '#FFFFFF', 'label' => 'Cards'],
-          'special_card' => ['default' => '#FFFFFF', 'label' => 'Special category', 'active_callback' => 'promotedCategory1Callback'],
+          'promoted_category1_color' => ['default' => '#FFFFFF', 'label' => 'Promoted category 1', 'active_callback' => 'promotedCategory1Callback'],
+          'promoted_category2_color' => ['default' => '#FFFFFF', 'label' => 'Promoted category 2', 'active_callback' => 'promotedCategory2Callback'],
           'menu_card' => ['default' => '#FFFFFF', 'label' => 'Side menu'],
           'text_buttons_color' => ['default' => '#FFFFFF', 'label' => 'Text buttons'],
           'buttons_color' => ['default' => '#3D7799', 'label' => 'Buttons'],
@@ -193,7 +186,7 @@ class ThemeManager
             'type' => 'checkbox',
             'active_callback' => [$this, 'activeBackgroundCallback']]);
         $wpCustomize->add_control('column_mode', [
-            'label' => __('Mode colonne', 'rfwpt'),
+            'label' => __('Show central column', 'rfwpt'),
             'section' => 'appearance',
             'settings' => 'column_mode',
             'type' => 'checkbox']);
@@ -245,14 +238,14 @@ class ThemeManager
             $categoriesChoices[$category->term_id] = $category->name;
         }
         $wpCustomize->add_control('promoted_category1', [
-            'label' => __('Promoted category', 'rfwpt') . ' 1',
+            'label' => __('Promoted category 1', 'rfwpt'),
             'section' => 'home',
             'settings' => 'promoted_category1',
             'type' => 'select',
             'choices' => $categoriesChoices,
             'active_callback' => [$this, 'promotedCategory1Callback']]);
         $wpCustomize->add_control('promoted_category2', [
-            'label' => __('Promoted category', 'rfwpt') . ' 2',
+            'label' => __('Promoted category 2', 'rfwpt'),
             'section' => 'home',
             'settings' => 'promoted_category2',
             'type' => 'select',
@@ -382,7 +375,8 @@ class ThemeManager
         }
         #global-content .section .card,
         #posts-tiles article,
-        #pagination {
+        #pagination,
+        #condensed .slideshow .card {
           background-color: <?php echo get_theme_mod('cards_color', '#FFFFFF'); ?>;
         }
         #global-content a.wp-block-file__button,
@@ -392,16 +386,19 @@ class ThemeManager
           text-decoration: none !important;
           background-color: <?php echo get_theme_mod('buttons_color', '#3D7799'); ?> !important;
         }
+        #promoted-category1,
         #special-category>article {
-            background-color: <?php echo get_theme_mod('special_card', '#FFFFFF'); ?> !important;
+            background-color: <?php echo get_theme_mod('promoted_category1_color', '#FFFFFF'); ?> !important;
         }
-        .column.is-one-fifths .card,
-        .column.is-three-quarters .card {
+        #promoted-category2 {
+            background-color: <?php echo get_theme_mod('promoted_category2_color', '#FFFFFF'); ?> !important;
+        }
+        #side-menu .card {
             background-color: <?php echo get_theme_mod('menu_card', '#FFFFFF'); ?> !important;
         }
         <?php if (get_theme_mod('navbar_shadow', true)): ?>
         #global-nav {
-          box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.3);
         }
         <?php endif;
         // Image de fond

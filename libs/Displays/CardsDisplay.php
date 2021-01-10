@@ -29,7 +29,6 @@ class CardsDisplay extends BaseDisplay
 
     /**
      * Affiche l'article courant
-     * @see PostManager::loadCurrentPost
      */
     private function showCurrentPostSummary(): void
     {
@@ -76,7 +75,6 @@ class CardsDisplay extends BaseDisplay
 
     /**
      * Affichage du contenu
-     * @see PostManager::loadCurrentPost
      */
     public function showSingle(): void
     {
@@ -101,6 +99,7 @@ class CardsDisplay extends BaseDisplay
 
     /**
      * Affiche les données complémentaires d'un articles
+     *
      * @param string $location Position de l'affichage à tester
      */
     private function showPostData(string $location): void

@@ -14,8 +14,6 @@ class CondensedDisplay extends BaseDisplay
      *
      * @param int $promotedCategory1 Catégorie spéciale sélectionnée
      * @param int $promotedCategory2 Catégorie spéciale sélectionnée
-     *
-     * @return bool True si des articles ont été affiché
      */
     public function showHome(int $promotedCategory1, int $promotedCategory2): void
     {
@@ -59,9 +57,9 @@ class CondensedDisplay extends BaseDisplay
                     <?php endwhile; ?>
                 </section>
                 <div class="columns">
-                    <div class="column"><?php $this->showPromotedCategory($promotedCategory1); ?></div>
+                    <div class="column"><?php $this->showPromotedCategory('promoted-category1', $promotedCategory1); ?></div>
                     <?php if ($promotedCategory2 !== 0) : ?>
-                    <div class="column"><?php $this->showPromotedCategory($promotedCategory2); ?></div>
+                    <div class="column"><?php $this->showPromotedCategory('promoted-category2', $promotedCategory2); ?></div>
                     <?php endif; ?>
                 </div>
             </div>
@@ -69,7 +67,13 @@ class CondensedDisplay extends BaseDisplay
         }
     }
 
-    private function showPromotedCategory($promotedCategory): void
+    /**
+     * Affich une des catégories promues
+     *
+     * @param string $divId Identifiant CSS
+     * @param int $promotedCategory Identifiant de la catégorie promue
+     */
+    private function showPromotedCategory(string $divId, int $promotedCategory): void
     {
         $promotedPosts = new WP_Query(
             [
@@ -77,7 +81,7 @@ class CondensedDisplay extends BaseDisplay
                 'cat' => $promotedCategory
             ]);
         ?>
-        <div class="promoted-category card">
+        <div id="<?php echo $divId; ?>" class="promoted-category card">
             <div class="card-content">
                 <p class="title"><?php echo get_cat_name($promotedCategory); ?></p>
                 <div class="content">
