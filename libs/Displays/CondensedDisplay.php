@@ -27,12 +27,12 @@ class CondensedDisplay extends BaseDisplay
             self::$sideFilesAdded = true;
         }
         if ($this->posts->have_posts()) {
-            $thumbnailUrl = $this->getThumbnailUrl();
             ?>
             <div id="condensed">
                 <section class="hero slideshow">
                     <?php while ($this->posts->have_posts() && $postsCount++ < $maxPosts) :
                         $this->posts->the_post();
+                        $thumbnailUrl = $this->getThumbnailUrl();
                         ?>
                         <div class="card">
                             <div class="card-content">
