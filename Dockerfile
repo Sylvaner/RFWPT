@@ -35,6 +35,7 @@ RUN echo "upstream php {" > /etc/nginx/sites-available/default && \
     echo "}" >> /etc/nginx/sites-available/default && \
     echo "#!/bin/sh" > /run.sh && \
     echo "nginx" >> /run.sh && \
+    echo "rm /etc/php/7.4/fpm/conf.d/10-opcache.ini" >> /run.sh && \
     echo "service php7.4-fpm start" >> /run.sh && \
     echo "service mysql start" >> /run.sh && \
     echo "chown www-data:www-data -R /app" >> /run.sh && \
