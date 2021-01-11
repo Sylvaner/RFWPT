@@ -142,10 +142,16 @@ class BaseDisplay
         if (get_theme_mod('use_custom_excerpt', true)) {
             $excerptSize = get_theme_mod('excerpt_size', 300);
             $addHellipsis = false;
-            $contentWithLinks = strip_tags(get_the_content(), '<a>');
+            // Hack pour les liens vers les fichiers téléchargés
+            $rawContent = get_the_content();
+            $contentWithLinks = strip_tags($rawContent, '<a>');
             // Extrait l'ensemble des liens
-            $linksFound = preg_match_all('/<a.*?href="(.*?)".*?>(.*?)<\/a>/', strip_tags($contentWithLinks, '<a>'), $matches);
-            $excerpt = wp_strip_all_tags(get_the_content());
+            $linksFound = preg_match_all('/<a.*?href="(.*?)".*?>(.*?)<\/a>/', $contentWithLinks, $matches);
+            $rawContent = str_replace('<!-- wp:file', "<br><!-- wp:file", $rawContent);
+            // Conserver le <br>
+            // https://developer.wordpress.org/reference/functions/wp_strip_all_tags/
+            $excerpt = preg_replace( '@<(script|style)[^>]*?>.*?</\\1>@si', '', $rawContent);
+            $excerpt = strip_tags($excerpt, '<br>');
             if (strlen($excerpt) < 300) {
                 $smallPost = true;
             }
