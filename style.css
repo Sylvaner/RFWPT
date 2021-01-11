@@ -91,6 +91,10 @@ body,
   margin-bottom: 1.5rem;
 }
 
+#posts-tiles .content {
+  word-break: break-all;
+}
+
 .tile-footer {
   font-size: 0.8rem;
   opacity: 0.8;
@@ -141,6 +145,7 @@ body {
   margin-left: 1rem !important;
   padding: 0.4rem !important;
   border-radius: 0.5rem !important;
+  line-height: 3rem;
 }
 
 .column.is-three-quarters .level,
