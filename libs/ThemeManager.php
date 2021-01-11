@@ -115,8 +115,11 @@ class ThemeManager
         $wpCustomize->add_setting('navbar_shadow', ['default' => true, 'transport' => 'refresh']);
 
         $wpCustomize->add_setting('show_home_mode', ['default' => 'cards', 'transport' => 'refresh']);
+        $wpCustomize->add_setting('home_slideshow_count', ['default' => 5, 'transport' => 'refresh']);
         $wpCustomize->add_setting('promoted_category1', ['default' => '', 'transport' => 'refresh']);
         $wpCustomize->add_setting('promoted_category2', ['default' => '', 'transport' => 'refresh']);
+        $wpCustomize->add_setting('promoted_category1_count', ['default' => 5, 'transport' => 'refresh']);
+        $wpCustomize->add_setting('promoted_category2_count', ['default' => 5, 'transport' => 'refresh']);
 
         $wpCustomize->add_setting('show_lists_mode', ['default' => 'cards', 'transport' => 'refresh']);
         $wpCustomize->add_setting('posts_per_page', ['default' => 20, 'transport' => 'refresh']);
@@ -133,7 +136,7 @@ class ThemeManager
           'background_color_wp' => ['default' => '#E0E0E0', 'label' => 'Background'],
           'cards_color' => ['default' => '#FFFFFF', 'label' => 'Cards'],
           'promoted_category1_color' => ['default' => '#FFFFFF', 'label' => 'Promoted category 1', 'active_callback' => 'promotedCategory1Callback'],
-          'promoted_category2_color' => ['default' => '#FFFFFF', 'label' => 'Promoted category 2', 'active_callback' => 'promotedCategory2Callback'],
+          'promoted_category2_color' => ['default' => '#FFFFFF', 'label' => 'Promoted category 2', 'active_callback' => 'condensedHomeCallback'],
           'menu_card' => ['default' => '#FFFFFF', 'label' => 'Side menu'],
           'text_buttons_color' => ['default' => '#FFFFFF', 'label' => 'Text buttons'],
           'buttons_color' => ['default' => '#3D7799', 'label' => 'Buttons'],
@@ -237,6 +240,12 @@ class ThemeManager
         foreach (get_categories() as $category ) {
             $categoriesChoices[$category->term_id] = $category->name;
         }
+        $wpCustomize->add_control('home_slideshow_count', [
+            'label' => __('Slideshow posts', 'rfwpt'),
+            'section' => 'home',
+            'settings' => 'home_slideshow_count',
+            'type' => 'text',
+            'active_callback' => [$this, 'condensedHomeCallback']]);
         $wpCustomize->add_control('promoted_category1', [
             'label' => __('Promoted category 1', 'rfwpt'),
             'section' => 'home',
@@ -244,14 +253,26 @@ class ThemeManager
             'type' => 'select',
             'choices' => $categoriesChoices,
             'active_callback' => [$this, 'promotedCategory1Callback']]);
+        $wpCustomize->add_control('promoted_category1_count', [
+            'label' => __('Promoted category 1 posts count', 'rfwpt'),
+            'section' => 'home',
+            'settings' => 'promoted_category1_count',
+            'type' => 'text',
+            'active_callback' => [$this, 'promotedCategory1SelectedCallback']]);
         $wpCustomize->add_control('promoted_category2', [
             'label' => __('Promoted category 2', 'rfwpt'),
             'section' => 'home',
             'settings' => 'promoted_category2',
             'type' => 'select',
             'choices' => $categoriesChoices,
-            'active_callback' => [$this, 'promotedCategory2Callback']]);
-
+            'active_callback' => [$this, 'condensedHomeCallback']]);
+        $wpCustomize->add_control('promoted_category2_count', [
+            'label' => __('Promoted category 2 posts count', 'rfwpt'),
+            'section' => 'home',
+            'settings' => 'promoted_category2_count',
+            'type' => 'text',
+            'active_callback' => [$this, 'promotedCategory2SelectedCallback']]);
+    
         /**
          * Listes
          */
@@ -451,9 +472,19 @@ class ThemeManager
             $control->manager->get_setting('show_home_mode')->value() === 'condensed';
     }
 
-    public function promotedCategory2Callback($control): bool
+    public function condensedHomeCallback($control): bool
     {
         return $control->manager->get_setting('show_home_mode')->value() === 'condensed';
+    }
+
+    public function promotedCategory1SelectedCallback($control): bool
+    {
+        return $control->manager->get_setting('promoted_category1')->value() !== '';
+    }
+
+    public function promotedCategory2SelectedCallback($control): bool
+    {
+        return $control->manager->get_setting('promoted_category2')->value() !== '';
     }
 
     public function customExcerptCallback($control): bool

@@ -11,14 +11,14 @@ class CondensedDisplay extends BaseDisplay
 
     /**
      * Affiche la page d'accueil condensée
-     *
+     * 
      * @param int $promotedCategory1 Catégorie spéciale sélectionnée
      * @param int $promotedCategory2 Catégorie spéciale sélectionnée
      */
     public function showHome(int $promotedCategory1, int $promotedCategory2): void
     {
         $postsCount = 0;
-        $maxPosts = 5;
+        $maxPosts = get_theme_mod('home_slideshow_count', 5);;
         if (!self::$sideFilesAdded) {
             echo '<script type="text/javascript" src="' . get_template_directory_uri() . '/js/slideshow.js"></script>';
             echo '<style>' . file_get_contents(get_template_directory() . '/css/slideshow.css') . '</style>';
@@ -58,9 +58,9 @@ class CondensedDisplay extends BaseDisplay
                 </section>
                 <?php if ($promotedCategory1 !== 0): ?>
                 <div class="columns">
-                    <div class="column"><?php $this->showPromotedCategory('promoted-category1', $promotedCategory1); ?></div>
+                    <div class="column"><?php $this->showPromotedCategory(1, $promotedCategory1); ?></div>
                     <?php if ($promotedCategory2 !== 0) : ?>
-                    <div class="column"><?php $this->showPromotedCategory('promoted-category2', $promotedCategory2); ?></div>
+                    <div class="column"><?php $this->showPromotedCategory(2, $promotedCategory2); ?></div>
                     <?php endif; ?>
                 </div>
                 <?php endif; ?>
@@ -72,18 +72,19 @@ class CondensedDisplay extends BaseDisplay
     /**
      * Affich une des catégories promues
      *
-     * @param string $divId Identifiant CSS
+     * @param int $promotedCategoryIndex Index de la catégorie promue
      * @param int $promotedCategory Identifiant de la catégorie promue
      */
-    private function showPromotedCategory(string $divId, int $promotedCategory): void
+    private function showPromotedCategory(string $promotedCategoryIndex, int $promotedCategory): void
     {
+        $postsLimit = max(1, get_theme_mod('promoted_category' . $promotedCategoryIndex . '_count', 5));
         $promotedPosts = new WP_Query(
             [
-                'posts_per_page' => 10,
+                'posts_per_page' => $postsLimit,
                 'cat' => $promotedCategory
             ]);
         ?>
-        <div id="<?php echo $divId; ?>" class="promoted-category card">
+        <div id="promoted-category<?php echo $promotedCategoryIndex; ?>" class="promoted-category card">
             <div class="card-content">
                 <p class="title"><?php echo get_cat_name($promotedCategory); ?></p>
                 <div class="content">

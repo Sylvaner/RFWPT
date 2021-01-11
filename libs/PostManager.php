@@ -29,9 +29,10 @@ class PostManager
                 break;
             case 'condensed':
                 require 'Displays/CondensedDisplay.php';
+                $filter = '';
+                // Filtrer les messages des catégories promues
                 $promotedCategory1 = get_theme_mod('promoted_category1', '');
                 $promotedCategory2 = get_theme_mod('promoted_category2', '');
-                $filter = '';
                 if ($promotedCategory1 !== '') {
                     $filter .= '-' . $promotedCategory1;
                     if ($promotedCategory2 !== '') {
@@ -39,7 +40,7 @@ class PostManager
                     }
                 }
                 $display = new CondensedDisplay(['cat' => $filter]);
-                $display->showHome(intval($promotedCategory1), intval($promotedCategory2));
+                $display->showHome($promotedCategory1, $promotedCategory2);
                 break;
         }
     }

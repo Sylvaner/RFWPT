@@ -79,7 +79,7 @@ class CardsDisplay extends BaseDisplay
     public function showSingle(): void
     {
         ?>
-        <div class="card">
+        <div class="card single-post">
             <div class="card-content">
                 <div class="title">
                     <?php echo $this->getHtmlPermalink(get_the_title()); ?>
