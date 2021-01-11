@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2021-01-10 20:29+0100\n"
+"PO-Revision-Date: 2021-01-11 11:54+0100\n"
 "Language-Team: \n"
 "X-Generator: Poedit 2.4.2\n"
 "Last-Translator: \n"
@@ -135,13 +135,22 @@ msgstr "Condensé"
 msgid "None"
 msgstr "Aucun"
 
+msgid "Slideshow posts count"
+msgstr "Nombre d'articles du caroussel"
+
+msgid "Promoted category 1 posts count"
+msgstr "Nombre d'articles de la première catégorie promue"
+
+msgid "Promoted category 2 posts count"
+msgstr "Nombre d'articles de la seconde catégorie promue"
+
 #: libs/ThemeManager.php:241
 msgid "Promoted category 1"
-msgstr "Catégorie spéciale"
+msgstr "Catégorie promue 1"
 
 #: libs/ThemeManager.php:248
 msgid "Promoted category 2"
-msgstr "Catégorie spéciale"
+msgstr "Catégorie promue 2"
 
 #: libs/ThemeManager.php:259
 msgid "Show lists mode"

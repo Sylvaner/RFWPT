@@ -241,7 +241,7 @@ class ThemeManager
             $categoriesChoices[$category->term_id] = $category->name;
         }
         $wpCustomize->add_control('home_slideshow_count', [
-            'label' => __('Slideshow posts', 'rfwpt'),
+            'label' => __('Slideshow posts count', 'rfwpt'),
             'section' => 'home',
             'settings' => 'home_slideshow_count',
             'type' => 'text',
