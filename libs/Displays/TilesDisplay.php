@@ -97,6 +97,7 @@ class TilesDisplay extends BaseDisplay
             echo '</div>';
         }
         echo '</div>';
+        $this->showPagination();
         return $postCount !== 0;
     }
 
