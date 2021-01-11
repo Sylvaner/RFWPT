@@ -424,6 +424,32 @@ class ThemeManager
         #side-menu .card {
             background-color: <?php echo get_theme_mod('menu_card', '#FFFFFF'); ?> !important;
         }
+        <?php if (get_theme_mod('column_mode', true)): ?>
+        @media only screen and (max-width: 1400px) {
+          #global-content > div {
+            width: 95% !important;
+            max-width: 95% !important;
+            justify-content: center;
+          }
+        }
+
+        @media only screen and (min-width: 1400px) {
+          #global-content > div {
+            width: 80% !important;
+            max-width: 80% !important;
+          }
+        }
+
+        .container.column-page {
+          padding-left: 0.75rem;
+          padding-right: 0.75rem;
+        }
+        <?php else: ?>
+        .featured-menu {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+        <?php endif; ?>
         <?php if (get_theme_mod('navbar_shadow', true)): ?>
         #global-nav {
           box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.3);

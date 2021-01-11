@@ -16,8 +16,8 @@ if (is_front_page()) {
       Menus::showFeaturedItems('featured-menu');
   }
   ?>
-  <div class="<?php if (get_theme_mod('column_mode', true)) { echo 'container is-max-desktop'; } else { echo 'section'; } ?>">
-    <div class="columns is-desktop">
+  <div class="<?php if (get_theme_mod('column_mode', true)) { echo 'container column-page'; } else { echo 'section'; } ?>">
+    <div class="columns">
       <div class="column <?php if (get_theme_mod('column_mode', true)) { echo 'is-three-quarters'; } else { echo 'is-four-fifths-desktop'; } ?>">
         <?php
         $postManager = new PostManager();
