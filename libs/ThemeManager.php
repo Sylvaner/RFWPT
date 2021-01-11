@@ -116,6 +116,7 @@ class ThemeManager
 
         $wpCustomize->add_setting('show_home_mode', ['default' => 'cards', 'transport' => 'refresh']);
         $wpCustomize->add_setting('home_slideshow_count', ['default' => 5, 'transport' => 'refresh']);
+        $wpCustomize->add_setting('tiles_thumbnail_background', ['default' => true, 'transport' => 'refresh']);
         $wpCustomize->add_setting('promoted_category1', ['default' => '', 'transport' => 'refresh']);
         $wpCustomize->add_setting('promoted_category2', ['default' => '', 'transport' => 'refresh']);
         $wpCustomize->add_setting('promoted_category1_count', ['default' => 5, 'transport' => 'refresh']);
@@ -240,6 +241,12 @@ class ThemeManager
         foreach (get_categories() as $category ) {
             $categoriesChoices[$category->term_id] = $category->name;
         }
+        $wpCustomize->add_control('tiles_thumbnail_background', [
+            'label' => __('Show thumbnail in background', 'rfwpt'),
+            'section' => 'home',
+            'settings' => 'tiles_thumbnail_background',
+            'type' => 'checkbox',
+            'active_callback' => [$this, 'tilesModeCallback']]);
         $wpCustomize->add_control('home_slideshow_count', [
             'label' => __('Slideshow posts count', 'rfwpt'),
             'section' => 'home',
@@ -466,6 +473,11 @@ class ThemeManager
         return $control->manager->get_setting('background_image_wp')->value() !== '';
     }
 
+    public function tilesModeCallback($control): bool
+    {
+        return $control->manager->get_setting('show_home_mode')->value() === 'tiles';
+    }
+
     public function promotedCategory1Callback($control): bool
     {
         return $control->manager->get_setting('show_home_mode')->value() === 'tiles' ||
@@ -484,7 +496,8 @@ class ThemeManager
 
     public function promotedCategory2SelectedCallback($control): bool
     {
-        return $control->manager->get_setting('promoted_category2')->value() !== '';
+        return $control->manager->get_setting('show_home_mode')->value() === 'condensed' &&
+               $control->manager->get_setting('promoted_category2')->value() !== '';
     }
 
     public function customExcerptCallback($control): bool

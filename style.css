@@ -92,7 +92,7 @@ body,
 }
 
 #posts-tiles .content {
-  word-break: break-all;
+  word-break: break-word;
 }
 
 .tile-footer {
