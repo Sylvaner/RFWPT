@@ -56,12 +56,14 @@ class CondensedDisplay extends BaseDisplay
                         </div>
                     <?php endwhile; ?>
                 </section>
+                <?php if ($promotedCategory1 !== 0): ?>
                 <div class="columns">
                     <div class="column"><?php $this->showPromotedCategory('promoted-category1', $promotedCategory1); ?></div>
                     <?php if ($promotedCategory2 !== 0) : ?>
                     <div class="column"><?php $this->showPromotedCategory('promoted-category2', $promotedCategory2); ?></div>
                     <?php endif; ?>
                 </div>
+                <?php endif; ?>
             </div>
                 <?php
         }
