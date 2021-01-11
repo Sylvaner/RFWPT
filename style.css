@@ -23,7 +23,7 @@ License URI: http://www.gnu.org/licenses/gpl.html
 
 .featured-menu .card:hover,
 #posts-tiles .tile.is-child:hover {
-  box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, .3), 0 0 0 1px rgba(10, 10, 10, .2);
+  box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.3), 0 0 0 1px rgba(10, 10, 10, 0.2);
 }
 
 .featured-menu .card-content {
@@ -72,7 +72,7 @@ body,
 }
 
 #global-content #posts-list .card:hover {
-  box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, .3), 0 0 0 1px rgba(10, 10, 10, .2);
+  box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.3), 0 0 0 1px rgba(10, 10, 10, 0.2);
 }
 
 #posts-list .card {
@@ -137,13 +137,13 @@ body {
 
 /** Bouton dans les aperçus **/
 .card .wp-block-file__button,
-.tile .wp-block-file__button
-{
-	margin-left: 1rem !important;
-	padding: 0.4rem !important;
-	border-radius: 0.5rem !important;
+.tile .wp-block-file__button {
+  margin-left: 1rem !important;
+  padding: 0.4rem !important;
+  border-radius: 0.5rem !important;
 }
 
+.column.is-three-quarters .level,
 .column.is-four-fifths-desktop .level {
   opacity: 0.8;
 }
@@ -172,4 +172,8 @@ body {
 .slideshow .tags {
   position: absolute;
   bottom: 3rem;
+}
+
+.container .single-post {
+  margin-bottom: 1rem;
 }
