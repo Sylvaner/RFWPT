@@ -39,6 +39,7 @@ if (is_front_page()) {
         ?>
       </div>
       <div id="side-menu" class="column">
+        <?php if (Menus::hasSideMenu()): ?>
         <div class="card">
           <div class="card-content">
             <aside class="menu">
@@ -50,6 +51,7 @@ if (is_front_page()) {
             </aside>
           </div>
         </div>
+        <?php endif; ?>
       </div>
     </div>
   </div>

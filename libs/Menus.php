@@ -189,4 +189,18 @@ class Menus
     {
         return self::getMenuData($menuName) !== null;
     }
+
+    public static function hasSideMenu(): bool
+    {
+        $hasSideMenu = false;
+        $menuLocations = get_nav_menu_locations();
+        for ($sideMenuIndex = 1; $sideMenuIndex < 7; ++$sideMenuIndex) {
+            $menuId = $menuLocations['side' . $sideMenuIndex . '-menu'];
+            if ($menuId > 0) {
+                $hasSideMenu = true;
+                break;
+            }
+        }
+        return $hasSideMenu;
+    }
 }
