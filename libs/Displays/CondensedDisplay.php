@@ -91,8 +91,8 @@ class CondensedDisplay extends BaseDisplay
                     <ul>
                     <?php
                     while ($promotedPosts->have_posts()) {
-                        $this->showListPost();
                         $promotedPosts->the_post();
+                        $this->showListPost();
                     }
                     ?>
                     </ul>
