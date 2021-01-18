@@ -393,13 +393,15 @@ class ThemeManager
           color: <?php echo get_theme_mod('navbar_hover_text_color', '#3273DC'); ?>;
         }
         #global-content .section .column:first-child a,
-        #posts-tiles p a {
-          color: <?php echo get_theme_mod('link_color', '#4A4A4A'); ?>;
+        #posts-tiles p a,
+        #condensed a {
+          color: <?php echo get_theme_mod('link_color', '#4A4A4A'); ?> !important;
           text-decoration: underline;
         }
         #global-content .section .column:first-child a:hover,
-        #posts-tiles p a:hover {
-          color: <?php echo get_theme_mod('link_hover_color', '#3273DC'); ?>;
+        #posts-tiles p a:hover,
+        #condensed a:hover {
+          color: <?php echo get_theme_mod('link_hover_color', '#3273DC'); ?> !important;
         }
         #global-content .section .card,
         #posts-tiles article,
