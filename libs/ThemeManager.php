@@ -392,15 +392,11 @@ class ThemeManager
           background-color: <?php echo get_theme_mod('navbar_hover_background_color', '#FAFAFA'); ?>;
           color: <?php echo get_theme_mod('navbar_hover_text_color', '#3273DC'); ?>;
         }
-        #global-content .section .column:first-child a,
-        #posts-tiles a,
-        #condensed a {
+        #global-content .column:first-child a {
           color: <?php echo get_theme_mod('link_color', '#4A4A4A'); ?> !important;
           text-decoration: underline;
         }
-        #global-content .section .column:first-child a:hover,
-        #posts-tiles a:hover,
-        #condensed a:hover {
+        #global-content .column:first-child a:hover {
           color: <?php echo get_theme_mod('link_hover_color', '#3273DC'); ?> !important;
         }
         #global-content .section .card,
