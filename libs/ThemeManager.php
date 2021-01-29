@@ -394,7 +394,6 @@ class ThemeManager
         }
         #global-content .column:first-child a {
           color: <?php echo get_theme_mod('link_color', '#4A4A4A'); ?>;
-          text-decoration: underline;
         }
         #global-content .column:first-child a:hover {
           color: <?php echo get_theme_mod('link_hover_color', '#3273DC'); ?>;
