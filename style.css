@@ -191,3 +191,42 @@ body {
 .container .single-post {
   margin-bottom: 1rem;
 }
+
+/** Mobile */
+@media only screen and (max-width: 600px) {
+  .featured-menu {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .featured-menu .column {
+      flex: 1 1 30%;
+  }
+  .featured-menu i {
+      font-size: 1.5rem !important;
+  }
+  .featured-menu p {
+      font-size: 0.8rem !important;
+  }
+  .featured-menu .column {
+    padding: 0.5rem;
+  }
+  .featured-menu .card-content {
+    padding: 1rem 0.5rem;
+  }
+  .slideshow .media-left {
+    display: none;
+  }
+  .slideshow .card-content .title {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .slideshow .card-content .content {
+    font-size: 0.9rem;
+  }
+  .slideshow {
+    height: 24rem !important;
+  }
+  .slideshow .card {
+    padding: 0.5rem 1rem !important;
+  }
+}

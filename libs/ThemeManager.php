@@ -385,21 +385,6 @@ class ThemeManager
         .featured-menu .card-content .title {
           color: <?php echo get_theme_mod('featured_text_color', '#FFFFFF'); ?>;
         }
-        @media only screen and (max-width: 600px) {
-          .featured-menu {
-            display: flex;
-            flex-wrap: wrap;
-          }
-          .featured-menu .column {
-              flex: 1 1 30%;
-          }
-          .featured-menu i {
-              font-size: 1.5rem !important;
-          }
-          .featured-menu p {
-              font-size: 0.8rem !important;
-          }
-        }
         #global-nav,
         #global-nav .navbar-dropdown {
           background-color: <?php echo get_theme_mod('navbar_background_color', '#FFFFFF'); ?>;
