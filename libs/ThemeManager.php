@@ -113,6 +113,7 @@ class ThemeManager
         $wpCustomize->add_setting('show_categories', ['default' => true, 'transport' => 'refresh']);
         $wpCustomize->add_setting('fixed_menu', ['default' => false, 'transport' => 'refresh']);
         $wpCustomize->add_setting('navbar_shadow', ['default' => true, 'transport' => 'refresh']);
+        $wpCustomize->add_setting('featured_first_side_menu', ['default' => false, 'transport' => 'refresh']);
 
         $wpCustomize->add_setting('show_home_mode', ['default' => 'cards', 'transport' => 'refresh']);
         $wpCustomize->add_setting('home_slideshow_count', ['default' => 5, 'transport' => 'refresh']);
@@ -145,6 +146,7 @@ class ThemeManager
           'link_hover_color' => ['default' => '#3273DC', 'label' => 'Link hover'],
           'featured_color' => ['default' => '#3D7799', 'label' => 'Featured background'],
           'featured_text_color' => ['default' => '#FFFFFF', 'label' => 'Featured text'],
+          'featured_side_menu_text_color' => ['default' => '#d82626', 'label' => 'Featured side menu color'],
           'navbar_background_color' => ['default' => '#FFFFFF', 'label' => 'Navbar background'],
           'navbar_text_color' => ['default' => '#4A4A4A', 'label' => 'Navbar text'],
           'navbar_hover_background_color' => ['default' => '#FAFAFA', 'label' => 'Navbar hover background'],
@@ -223,7 +225,12 @@ class ThemeManager
             'section' => 'features',
             'settings' => 'navbar_shadow',
             'type' => 'checkbox']);
-
+        $wpCustomize->add_control('featured_first_side_menu', [
+            'label' => __('First side menu featured', 'rfwpt'),
+            'section' => 'features',
+            'settings' => 'featured_first_side_menu',
+            'type' => 'checkbox']);
+                        
         /**
          * Home
          */
@@ -378,6 +385,21 @@ class ThemeManager
         .featured-menu .card-content .title {
           color: <?php echo get_theme_mod('featured_text_color', '#FFFFFF'); ?>;
         }
+        @media only screen and (max-width: 600px) {
+          .featured-menu {
+            display: flex;
+            flex-wrap: wrap;
+          }
+          .featured-menu .column {
+              flex: 1 1 30%;
+          }
+          .featured-menu i {
+              font-size: 1.5rem !important;
+          }
+          .featured-menu p {
+              font-size: 0.8rem !important;
+          }
+        }
         #global-nav,
         #global-nav .navbar-dropdown {
           background-color: <?php echo get_theme_mod('navbar_background_color', '#FFFFFF'); ?>;
@@ -476,6 +498,11 @@ class ThemeManager
         #banner {
           height: <?php echo get_theme_mod('banner_height', '100px'); ?>;
           background: url('<?php echo wp_get_attachment_url(get_theme_mod('banner_image', '')); ?>') no-repeat;
+        }
+        <?php endif;
+        if (get_theme_mod('featured_first_side_menu', false)) : ?>
+        #side-menu aside ul:first-of-type .menu-item {
+            color: <?php echo get_theme_mod('featured_side_menu_text_color', '#d82626'); ?> !important;
         }
         <?php endif;
         // Bug d'affichage, les 2 menus se superposent
